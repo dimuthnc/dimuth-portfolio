@@ -35,4 +35,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .idea/
- docs/*
+ docs/DimuthMenikgama-updatedCV.pdf
+ docs/portfolio-website-PRD.docx
