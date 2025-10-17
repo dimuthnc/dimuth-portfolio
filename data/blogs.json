@@ -1,0 +1,39 @@
+[
+  {
+    "type": "internal",
+    "title": "Designing a resilient integration platform with Apache Camel and Kafka",
+    "slug": "resilient-integration-platform-camel-kafka",
+    "source": "dimuth.dev",
+    "date": "2025-03-02",
+    "tags": ["apache-camel", "kafka", "integration", "event-sourcing"],
+    "excerpt": "How I built a multi-purpose integration platform connecting storages, queues, and REST APIs with audit and replay using event sourcing."
+  },
+  {
+    "type": "external",
+    "title": "A deep dive into Transaction Risk Analysis for Open Banking & PSD2",
+    "url": "https://medium.com/@dimuth/a-deep-dive-transaction-risk-analysis-open-banking-psd2",
+    "source": "Medium",
+    "date": "2023-08-14",
+    "tags": ["open-banking", "psd2", "fraud-detection"],
+    "excerpt": "Understanding TRA concepts, risk signals, and how banks can integrate fraud detection into OB flows."
+  },
+  {
+    "type": "internal",
+    "title": "Scaling API gateways: lessons from WSO2 Open Banking deployments",
+    "slug": "scaling-api-gateways-open-banking",
+    "source": "dimuth.dev",
+    "date": "2024-11-12",
+    "tags": ["api-gateway", "wso2", "performance"],
+    "excerpt": "Throughput tuning, SLOs, and the real-world trade-offs behind latency and reliability at scale."
+  },
+  {
+    "type": "external",
+    "title": "Why banks should consider becoming Third Party Providers (TPPs)",
+    "url": "https://wso2.com/library/article/why-banks-should-become-tpps/",
+    "source": "WSO2 Library",
+    "date": "2021-05-09",
+    "tags": ["banking", "tpp", "strategy"],
+    "excerpt": "Exploring opportunities for banks to play as TPPs in the Open Banking ecosystem."
+  }
+]
+

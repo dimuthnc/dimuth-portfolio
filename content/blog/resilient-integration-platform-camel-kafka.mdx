@@ -1,0 +1,51 @@
+---
+title: Designing a resilient integration platform with Apache Camel and Kafka
+date: 2025-03-02
+tags:
+  - apache-camel
+  - kafka
+  - integration
+  - event-sourcing
+description: How I designed a multi-purpose integration platform connecting storages, queues, and REST APIs with audit and replay using event sourcing.
+---
+
+## Overview
+
+In this post, I share how we designed a multi-purpose integration platform to connect storage systems, message queues, and REST APIs—while enabling audit trails and replay capabilities using event sourcing patterns.
+
+## Architecture highlights
+
+- Apache Camel for routing and transformations
+- Kafka topics as an immutable event log
+- Outbox, replay, and dead-letter patterns
+
+### Example Camel route
+
+```java
+from("direct:ingest")
+    .routeId("ingest-route")
+    .process(exchange -> {
+        // enrich, validate, and normalize payloads
+    })
+    .to("kafka:events?topic=ingest")
+    .log("Ingested event: ${body}");
+```
+
+### Replay strategy
+
+1. Query events with specific correlation IDs
+2. Re-publish to dedicated replay topics
+3. Track replayed events and outcomes
+
+| Capability | Detail |
+|-----------:|:-------|
+| Audit | Event sourcing with immutable log |
+| Replay | Deterministic reprocessing via dedicated topics |
+| Observability | Distributed tracing + DLQ metrics |
+
+## Lessons learned
+
+- Keep routes small and composable
+- Prefer idempotent consumers
+- Build observability from the start
+
