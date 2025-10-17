@@ -91,7 +91,7 @@ export function Navbar() {
 								aria-label="Open GitHub in new tab"
 							>
 								<a
-									href="https://github.com/dimuth"
+									href="https://github.com/dimuthnc"
 									target="_blank"
 									rel="noopener"
 								>
@@ -105,7 +105,7 @@ export function Navbar() {
 								aria-label="Open LinkedIn in new tab"
 							>
 								<a
-									href="https://www.linkedin.com/in/dimuth/"
+									href="https://www.linkedin.com/in/dimuththaraka"
 									target="_blank"
 									rel="noopener"
 								>
@@ -179,7 +179,7 @@ export function Navbar() {
 								aria-label="Open GitHub in new tab"
 							>
 								<a
-									href="https://github.com/dimuth"
+									href="https://github.com/dimuthnc"
 									target="_blank"
 									rel="noopener"
 									className="w-full justify-start"
@@ -194,7 +194,7 @@ export function Navbar() {
 								aria-label="Open LinkedIn in new tab"
 							>
 								<a
-									href="https://www.linkedin.com/in/dimuth/"
+									href="https://www.linkedin.com/in/dimuththaraka"
 									target="_blank"
 									rel="noopener"
 									className="w-full justify-start"

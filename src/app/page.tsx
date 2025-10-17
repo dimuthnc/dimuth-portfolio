@@ -27,18 +27,20 @@ export default function Home() {
           </p>
         </div>
         <p className="max-w-prose text-sm leading-relaxed text-muted-foreground sm:text-base">
-          Seasoned engineer building reliable web platforms and developer tools. Passionate about
-          performance, clean DX, and thoughtful UI systems. Based in Paris; collaborating globally.
+          Experienced and results‑driven Software Engineer with 8+ years across banking/financial services,
+          API management, IAM, middleware, and distributed systems. Proven track record in microservices
+          architecture, enterprise integration, open banking compliance, and application security—designing
+          scalable platforms, improving performance, and leading teams.
         </p>
         <div className="flex flex-wrap items-center gap-3">
           <Button asChild variant="default">
-            <Link href="https://www.linkedin.com/in/dimuth/" target="_blank" rel="noopener" aria-label="Open LinkedIn profile in a new tab">
+            <Link href="https://www.linkedin.com/in/dimuththaraka" target="_blank" rel="noopener" aria-label="Open LinkedIn profile in a new tab">
               <Linkedin />
               LinkedIn
             </Link>
           </Button>
           <Button asChild variant="outline">
-            <Link href="https://github.com/dimuth" target="_blank" rel="noopener" aria-label="Open GitHub profile in a new tab">
+            <Link href="https://github.com/dimuthnc" target="_blank" rel="noopener" aria-label="Open GitHub profile in a new tab">
               <Github />
               GitHub
             </Link>
