@@ -57,7 +57,7 @@ export function PortfolioGrid({ projects }: { projects: Project[] }) {
             <article key={`${p.kind}:${p.title}`} className="rounded-lg border bg-card text-card-foreground overflow-hidden">
               {p.thumbnail ? (
                 <div className="relative h-40 w-full">
-                  <Image src={p.thumbnail} alt="Project thumbnail" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 33vw" />
+                  <Image src={p.thumbnail} alt={`${p.title} thumbnail`} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 33vw" />
                 </div>
               ) : (
                 <div className="h-2 w-full bg-accent" aria-hidden />

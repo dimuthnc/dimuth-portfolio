@@ -1,7 +1,28 @@
 import { loadBlogs } from "@/lib/content";
 import { BlogList } from "@/components/blog-list";
+import type { Metadata } from "next";
+import { canonical, defaultOgImage } from "@/lib/seo";
 
 export const dynamic = "force-static";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const title = "Blog";
+  const description = "Articles, notes, and references.";
+  const url = canonical("/blog");
+  return {
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title,
+      description,
+      url,
+      type: "website",
+      images: [{ url: defaultOgImage, width: 1200, height: 630, alt: `${title} — Dimuth Menikgamage` }],
+    },
+    twitter: { card: "summary_large_image", title, description, images: [defaultOgImage] },
+  };
+}
 
 export default async function BlogIndexPage() {
   const posts = await loadBlogs();
@@ -15,4 +36,3 @@ export default async function BlogIndexPage() {
     </div>
   );
 }
-
