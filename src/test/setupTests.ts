@@ -6,25 +6,53 @@ import { vi } from "vitest";
 
 // Ensure TextEncoder/TextDecoder come from Node's util to avoid esbuild invariant issue
 // Attach to global and window when available
-;(globalThis as any).TextEncoder = TextEncoder;
-;(globalThis as any).TextDecoder = TextDecoder as unknown as typeof globalThis.TextDecoder;
+(
+  globalThis as unknown as {
+    TextEncoder: typeof TextEncoder;
+    TextDecoder: typeof globalThis.TextDecoder;
+  }
+).TextEncoder = TextEncoder;
+(
+  globalThis as unknown as {
+    TextEncoder: typeof TextEncoder;
+    TextDecoder: typeof globalThis.TextDecoder;
+  }
+).TextDecoder = TextDecoder as unknown as typeof globalThis.TextDecoder;
 
 if (typeof window !== "undefined") {
-  (window as any).TextEncoder = TextEncoder as any;
-  (window as any).TextDecoder = TextDecoder as any;
+  Object.assign(window, {
+    TextEncoder,
+    TextDecoder: TextDecoder as unknown as typeof globalThis.TextDecoder,
+  });
 }
 
 // Mock next/link to a plain anchor for JSDOM
+
+type MockLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+  href: string | URL;
+  children?: React.ReactNode;
+};
+
 vi.mock("next/link", () => ({
   __esModule: true,
-  default: ({ href, children, ...rest }: any) =>
-    React.createElement("a", { href: typeof href === "string" ? href : "#", ...rest }, children),
+  default: ({ href, children, ...rest }: MockLinkProps) =>
+    React.createElement(
+      "a",
+      { href: typeof href === "string" ? href : String(href), ...rest },
+      children
+    ),
 }));
 
 // Mock next/image to a plain img for JSDOM
+
+type MockImageProps = React.ImgHTMLAttributes<HTMLImageElement> & {
+  alt?: string;
+};
+
 vi.mock("next/image", () => ({
   __esModule: true,
-  default: (props: any) => React.createElement("img", { ...props, alt: props.alt ?? "" }),
+  default: (props: MockImageProps) =>
+    React.createElement("img", { ...props, alt: props.alt ?? "" }),
 }));
 
 // JSDOM polyfills
