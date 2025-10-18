@@ -1,0 +1,33 @@
+[
+  {
+    "kind": "site",
+    "title": "JWT Decoder",
+    "description": "A fast, client-side JWT inspector with signature hints.",
+    "url": "https://jwt.dimuth.dev",
+    "secondaryUrl": "https://github.com/dimuthnc/jwt-decoder",
+    "tags": ["Security", "JWT", "React"],
+    "thumbnail": "/images/projects/jwt.png",
+    "date": "2024-11-10",
+    "pinned": true
+  },
+  {
+    "kind": "repo",
+    "title": "Base64 Toolkit",
+    "description": "Utilities for Base64 encoding/decoding in browser and Node.",
+    "url": "https://github.com/dimuthnc/base64-toolkit",
+    "tags": ["TypeScript", "Utilities"],
+    "thumbnail": "/images/projects/base64.png",
+    "date": "2023-08-01",
+    "pinned": false
+  },
+  {
+    "kind": "site",
+    "title": "Portfolio v1",
+    "description": "First iteration of my personal site.",
+    "url": "https://dimuth.dev",
+    "tags": ["Next.js", "Tailwind"],
+    "date": "2022-06-15",
+    "pinned": false
+  }
+]
+
