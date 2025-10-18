@@ -1,6 +1,6 @@
 import { loadBlogs, type InternalBlogPost } from "@/lib/content";
 import { notFound } from "next/navigation";
-import { getAllMdxSlugs, getMdxPost } from "@/lib/mdx";
+import { getMdxPost } from "@/lib/mdx";
 import TableOfContents from "@/components/toc";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
@@ -9,18 +9,7 @@ import type { Metadata } from "next";
 import { canonical, defaultOgImage } from "@/lib/seo";
 import { loadProfile } from "@/lib/content";
 
-export const dynamic = "force-static";
-
-export async function generateStaticParams() {
-  const posts = await loadBlogs();
-  const jsonSlugs = posts
-    .filter((p): p is InternalBlogPost => p.type === "internal")
-    .map((p) => ({ slug: p.slug }));
-  const mdxSlugs = (await getAllMdxSlugs()).map((s) => ({ slug: s }));
-  const merged = new Map<string, { slug: string }>();
-  for (const s of [...jsonSlugs, ...mdxSlugs]) merged.set(s.slug, s);
-  return Array.from(merged.values());
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const mdx = await getMdxPost(params.slug);

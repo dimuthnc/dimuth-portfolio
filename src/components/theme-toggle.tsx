@@ -16,13 +16,13 @@ export function ThemeToggle() {
   return (
     <div className="flex items-center gap-2">
       <Button variant="ghost" size="icon" aria-label="Set light theme" onClick={() => setTheme('light')}>
-        <Sun />
+        <Sun aria-hidden />
       </Button>
       <Button variant="ghost" size="icon" aria-label="Set dark theme" onClick={() => setTheme('dark')}>
-        <Moon />
+        <Moon aria-hidden />
       </Button>
       <Button variant="ghost" size="icon" aria-label="Use system theme" onClick={() => setTheme('system')}>
-        <Laptop />
+        <Laptop aria-hidden />
       </Button>
       <span className="text-sm text-muted-foreground">
         {mounted ? `Theme: ${current ?? 'system'}` : '…'}
@@ -31,3 +31,4 @@ export function ThemeToggle() {
   )
 }
 
+export default ThemeToggle

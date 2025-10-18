@@ -64,7 +64,7 @@ export function PortfolioGrid({ projects }: { projects: Project[] }) {
               )}
               <div className="p-5">
                 <div className="flex items-start justify-between gap-3">
-                  <h3 className="text-base font-semibold leading-snug">{p.title}</h3>
+                  <h2 className="text-base font-semibold leading-snug">{p.title}</h2>
                   <span className="shrink-0 rounded-full border px-2 py-0.5 text-xs text-muted-foreground capitalize">{p.kind}</span>
                 </div>
                 {p.date ? (
@@ -83,12 +83,12 @@ export function PortfolioGrid({ projects }: { projects: Project[] }) {
                 <div className="mt-5 flex flex-wrap items-center gap-3">
                   {SHOW_EXTERNAL_WARNING ? (
                     <Button size="sm" variant="secondary" onClick={() => openExternal(p.url)} aria-label={p.kind === "repo" ? "View repository" : "View site"}>
-                      {p.kind === "repo" ? "View repo" : "View site"} <ExternalLink className="size-3.5" />
+                      {p.kind === "repo" ? "View repo" : "View site"} <ExternalLink className="size-3.5" aria-hidden />
                     </Button>
                   ) : (
                     <Button asChild size="sm" variant="secondary" aria-label={p.kind === "repo" ? "View repository" : "View site"}>
                       <a href={p.url} target="_blank" rel="noopener noreferrer">
-                        {p.kind === "repo" ? "View repo" : "View site"} <ExternalLink className="size-3.5" />
+                        {p.kind === "repo" ? "View repo" : "View site"} <ExternalLink className="size-3.5" aria-hidden />
                       </a>
                     </Button>
                   )}
@@ -96,12 +96,12 @@ export function PortfolioGrid({ projects }: { projects: Project[] }) {
                   {p.kind === "site" && "secondaryUrl" in p && p.secondaryUrl ? (
                     SHOW_EXTERNAL_WARNING ? (
                       <Button size="sm" variant="outline" onClick={() => openExternal(p.secondaryUrl!)} aria-label="View source on GitHub">
-                        Source <Github className="size-3.5" />
+                        Source <Github className="size-3.5" aria-hidden />
                       </Button>
                     ) : (
                       <Button asChild size="sm" variant="outline" aria-label="View source on GitHub">
                         <a href={p.secondaryUrl} target="_blank" rel="noopener noreferrer">
-                          Source <Github className="size-3.5" />
+                          Source <Github className="size-3.5" aria-hidden />
                         </a>
                       </Button>
                     )
@@ -120,7 +120,7 @@ export function PortfolioGrid({ projects }: { projects: Project[] }) {
             <DialogDescription>Continue to the external site?</DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button variant="secondary" onClick={() => setPendingUrl(null)}>Cancel</Button>
+            <Button variant="secondary" onClick={() => setPendingUrl(null)} autoFocus>Cancel</Button>
             <Button onClick={() => pendingUrl && window.open(pendingUrl, "_blank", "noopener,noreferrer")}>Continue</Button>
           </DialogFooter>
         </DialogContent>

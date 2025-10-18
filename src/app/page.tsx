@@ -1,4 +1,4 @@
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 
 import { loadProfile } from "@/lib/content";
 import { Hero } from "@/components/hero";

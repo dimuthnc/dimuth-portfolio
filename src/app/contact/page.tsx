@@ -5,6 +5,8 @@ import { Mail, Phone } from "lucide-react";
 import type { Metadata } from "next";
 import { canonical, defaultOgImage } from "@/lib/seo";
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata(): Promise<Metadata> {
   const title = "Contact";
   const description = "Get in touch with Dimuth Menikgamage. Send a message or reach out via email or phone.";

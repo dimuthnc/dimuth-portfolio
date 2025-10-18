@@ -3,8 +3,12 @@ import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
-import { Toaster } from "sonner";
+import dynamic from "next/dynamic";
 import { getSiteUrl, defaultOgImage } from "@/lib/seo";
+
+const Toaster = dynamic(() => import("sonner").then((m) => ({ default: m.Toaster })), {
+  ssr: false,
+});
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -20,7 +24,8 @@ export const metadata: Metadata = {
     default: "Dimuth Menikgamage",
     template: "%s | Dimuth Menikgamage",
   },
-  description: "Senior Software Engineer @ Crédit Agricole CIB. Building reliable platforms, APIs, and developer tools.",
+  description:
+    "Senior Software Engineer @ Crédit Agricole CIB. Building reliable platforms, APIs, and developer tools.",
   alternates: {
     canonical: "/",
   },
@@ -29,7 +34,14 @@ export const metadata: Metadata = {
     url: "/",
     title: "Dimuth Menikgamage",
     description: "Senior Software Engineer @ Crédit Agricole CIB.",
-    images: [{ url: defaultOgImage, width: 1200, height: 630, alt: "Dimuth Menikgamage — Portfolio" }],
+    images: [
+      {
+        url: defaultOgImage,
+        width: 1200,
+        height: 630,
+        alt: "Dimuth Menikgamage — Portfolio",
+      },
+    ],
     siteName: "Dimuth Menikgamage",
   },
   twitter: {
@@ -52,9 +64,17 @@ export default function RootLayout({
       <body
         className={`${jetbrainsMono.variable} min-h-screen bg-background text-foreground antialiased`}
       >
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
           <Navbar />
-          <main id="content" className="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-8">
+          <main
+            id="content"
+            className="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-8"
+          >
             {children}
           </main>
           <Toaster richColors position="top-center" />

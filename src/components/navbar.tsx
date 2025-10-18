@@ -95,7 +95,7 @@ export function Navbar() {
 									target="_blank"
 									rel="noopener"
 								>
-									<Github />
+									<Github aria-hidden />
 								</a>
 							</Button>
 							<Button
@@ -109,7 +109,7 @@ export function Navbar() {
 									target="_blank"
 									rel="noopener"
 								>
-									<Linkedin />
+									<Linkedin aria-hidden />
 								</a>
 							</Button>
 						</div>
@@ -184,7 +184,7 @@ export function Navbar() {
 									rel="noopener"
 									className="w-full justify-start"
 								>
-									<Github /> GitHub
+									<Github className="mr-1" aria-hidden /> GitHub
 								</a>
 							</Button>
 							<Button
@@ -199,7 +199,7 @@ export function Navbar() {
 									rel="noopener"
 									className="w-full justify-start"
 								>
-									<Linkedin /> LinkedIn
+									<Linkedin className="mr-1" aria-hidden /> LinkedIn
 								</a>
 							</Button>
 						</li>

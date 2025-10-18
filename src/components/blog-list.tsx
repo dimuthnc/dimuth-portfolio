@@ -40,7 +40,7 @@ export function BlogList({ posts }: { posts: BlogPost[] }) {
         return (
           <article key={key} className="rounded-lg border bg-card text-card-foreground p-5">
             <div className="flex items-start justify-between gap-3">
-              <h3 className="text-base font-semibold leading-snug">
+              <h2 className="text-base font-semibold leading-snug">
                 {/* Title as button to handle external/internal */}
                 <button
                   onClick={() => onCardClick(post)}
@@ -49,7 +49,7 @@ export function BlogList({ posts }: { posts: BlogPost[] }) {
                 >
                   {post.title}
                 </button>
-              </h3>
+              </h2>
               <span className="shrink-0 rounded-full border px-2 py-0.5 text-xs text-muted-foreground">
                 {post.source}
               </span>
@@ -72,7 +72,7 @@ export function BlogList({ posts }: { posts: BlogPost[] }) {
                 </Button>
               ) : (
                 <Button variant="secondary" size="sm" aria-label="Read post (external)" onClick={() => onCardClick(post)}>
-                  Read externally <ExternalLink className="size-3.5" />
+                  Read externally <ExternalLink className="size-3.5" aria-hidden />
                 </Button>
               )}
             </div>
@@ -89,7 +89,7 @@ export function BlogList({ posts }: { posts: BlogPost[] }) {
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button variant="secondary" onClick={() => setPendingUrl(null)}>Cancel</Button>
+            <Button variant="secondary" onClick={() => setPendingUrl(null)} autoFocus>Cancel</Button>
             <Button onClick={confirmNavigate}>Continue</Button>
           </DialogFooter>
         </DialogContent>

@@ -3,7 +3,7 @@ import { PortfolioGrid } from "@/components/portfolio-grid";
 import type { Metadata } from "next";
 import { canonical, defaultOgImage } from "@/lib/seo";
 
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   const title = "Portfolio";
