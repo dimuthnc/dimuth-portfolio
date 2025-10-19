@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
 import dynamic from "next/dynamic";
 import { getSiteUrl, defaultOgImage } from "@/lib/seo";
+import { Analytics } from "@vercel/analytics/next";
 
 const Toaster = dynamic(() => import("sonner").then((m) => ({ default: m.Toaster })), {
   ssr: false,
@@ -79,6 +80,8 @@ export default function RootLayout({
           </main>
           <Toaster richColors position="top-center" />
         </ThemeProvider>
+        {/* Vercel Web Analytics */}
+        <Analytics />
       </body>
     </html>
   );
