@@ -1,0 +1,64 @@
+---
+title: Practical Data Mining with Python
+date: 2017-05-30
+tags:
+  - Python
+  - Data Mining
+  - Machine Learning
+  - Pandas
+  - Scikit-Learn
+description:
+---
+
+## Overview
+
+Python is the current(2017 May) leader among the programming languages that are used for Data mining and Machine Learning tasks due to its sophisticated capabilities and practicality of creating end user products. Another reason for this is the support provided through various libraries such as numpy, scipy, matplotlib, pandas or scikit-learn. We will be discussing how to create machine learning models using python to retrieve useful data for various purposes in this tutorial series.
+
+## Data Analyzing with Pandas
+
+Pandas library provides data analysis tools along with easy-to-use data structures to make life easier for the programmers or data scientists. Pandas is an open-source data analysis library with frequent releases and support which makes it popular among others.
+
+Before using pandas library in python environment, we need to make sure it is correctly installed. If you have installed [Anaconda](https://www.anaconda.com/download) and hope to run applications using it or spyder IDE, then you don’t have to worry about installing it again. Otherwise you will have to use [pypi (pip install pandas)](https://pypi.org/) or any other similar way to install pandas into your python environment. Refer [this document](https://pandas.pydata.org/pandas-docs/stable/getting_started/install.html) if you want more support for installing pandas.
+
+First we will look at how to import data into the python program as a pandas dataframe which can be manipulated easily.  We will use [this](https://s3.amazonaws.com/drivendata/data/44/public/dengue_labels_train.csv) dataset from [drivenData](https://www.drivendata.org/) website’s [DengAI competition](https://www.drivendata.org/competitions/44/dengai-predicting-disease-spread/). You can easily import dataset using the following command.
+
+<code>train_features = pd.read_csv('/path_to_file/file.csv',index_col=[0,1,2])</code>
+
+In here we are indexing the dataset from the column 0,1 and 2.
+
+Then you may need to filter out some set of data based on index. As an example I can extract only the data with city = ‘sj’ as below.
+
+<code>sj_train_features = train_features.loc['sj']</code>
+
+Note that city is an indexed column here.
+
+If you feel like some fields are unnecessary, you can remove a single column using drop method as below.
+
+<code>sj_train_features.drop('week_start_date', axis=1, inplace=True)</code>
+
+This will drop ‘week_start_date’ column since axis is set to 1. From that (axis=1) we are telling the program to remove a column. If axis is set to 0, it will look for a row to remove.  By setting inplace= True the resulting dataframe will be saved as ‘sj_train_features’ dataframe. Otherwise you can assign another variable which can hold that dataframe while ‘sj_train_features’ still holding the original dataframe.
+
+If you want to remove more than one column at once, other than dropping them one by one, you can simply filter them out using the below method.
+
+<code>
+    features_sj =["reanalysis_relative_humidity_percent","station_avg_temp_c"]
+    sj_train_features = sj_train_features[features_sj]
+</code>
+In the first line, ‘feature_sj’ variable will hold what columns to be included in the resulting set. In the next line we filter out those columns from unnecessary columns. This two features will be useful to overcome curse of dimensionality.
+
+<code>sj_train_features.fillna(method='ffill', inplace=True)</code>
+
+In here forward filling method is used (‘ffill’). That means filling the missing value with previously seen value for that column. There is other missing values filling methods like ‘bfill’  (next value) and mean ( average of the column). if you want to replace missing values with the mean of that column you can use below code.
+
+<code>sj_train_features.fillna(sj_train_features.mean(), inplace=True)</code>
+
+Let's take a look how we can shift particular column values relative to other columns. This is very important when working with features that have time lags. We can achieve this simply using shift() method as below. As an example here we are showing how to shift ‘reanalysis_relative_humidity_percent’ feature by two rows to the downward direction.
+
+<code>sj_train_features=sj_train_features.assign(reanalysis_relative_humidity_percent=sj_train_features['reanalysis_relative_humidity_percent'].shift(2))</code>
+
+Here assign method will assign shifted row to the same column replacing old values. Note that by shifting two rows you end up with a dataset with first two rows are empty. Two last values also will disappear. To fill those missing values we can use above discussed missing value filling methods. Other than that we can simply remove those rows easily using below code.
+
+<code>sj_train_features = sj_train_features[2:]</code>
+
+In this post we discussed only basic features of pandas. If you want more details about these features or explore new features of pandas, please refer [this official documentation](http://pandas.pydata.org/pandas-docs/stable/) of pandas.
+

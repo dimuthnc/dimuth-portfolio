@@ -1,39 +1,88 @@
 [
+
   {
-    "type": "internal",
-    "title": "Designing a resilient integration platform with Apache Camel and Kafka",
-    "slug": "resilient-integration-platform-camel-kafka",
-    "source": "dimuth.dev",
-    "date": "2025-03-02",
-    "tags": ["apache-camel", "kafka", "integration", "event-sourcing"],
-    "excerpt": "How I built a multi-purpose integration platform connecting storages, queues, and REST APIs with audit and replay using event sourcing."
+    "type": "external",
+    "title": "Apriori Algorithm for frequent pattern Mining",
+    "url": "https://medium.com/@dimuthcse/apriori-algorithm-for-frequent-pattern-mining-7e8fb20b6aff",
+    "source": "Medium",
+    "date": "2017-03-23",
+    "tags": ["Machine Learning", "Data Mining", "Apriori", "Data Science"],
+    "excerpt": "This article explains the Apriori algorithm used for mining frequent itemsets and relevant association rules."
   },
   {
     "type": "external",
-    "title": "A deep dive into Transaction Risk Analysis for Open Banking & PSD2",
-    "url": "https://medium.com/@dimuth/a-deep-dive-transaction-risk-analysis-open-banking-psd2",
+    "title": "Apriori Algorithm Explained — Part 2",
+    "url": "https://medium.com/@dimuthcse/apriori-algorithm-explained-part-2-26066c83d6ae",
     "source": "Medium",
-    "date": "2023-08-14",
-    "tags": ["open-banking", "psd2", "fraud-detection"],
+    "date": "2017-03-26",
+    "tags": ["Machine Learning", "Data Mining", "Apriori", "Data Science"],
+    "excerpt": "This article explains the Apriori algorithm used for mining frequent itemsets and relevant association rules."
+  },
+  {
+    "type": "external",
+    "title": "Integrating Fraud detection systems with Open Banking",
+    "url": "https://medium.com/@dimuthcse/integrating-fraud-detection-systems-with-open-banking-8dc6b36e55f8",
+    "source": "Medium",
+    "date": "2020-05-16",
+    "tags": ["Fraud Detection", "Open Banking", "Machine Learning", "PSD2"],
+    "excerpt": "This article discusses how to integrate fraud detection systems within Open Banking frameworks."
+  },
+  {
+    "type": "external",
+    "title": "How to limit number of active concurrent user sessions with WSO2 Identity Server",
+    "url": "https://medium.com/@dimuthcse/how-to-limit-number-of-active-concurrent-user-sessions-with-wso2-identity-server-98d0fed61de2",
+    "source": "Medium",
+    "date": "2018-08-06",
+    "tags": ["WSO2", "Identity and Access Management", "IAM", "WSO2 Identity Server"],
+    "excerpt": "This article explains how to limit the number of active concurrent user sessions in WSO2 Identity Server."
+  },
+  {
+    "type": "external",
+    "title": "Passing parameters between JAX-RS WriterInterceptor and ReaderInterceptor",
+    "url": "https://medium.com/@dimuthcse/passing-parameters-between-jax-rs-writerinterceptor-and-readerinterceptor-9e63f781d95",
+    "source": "Medium",
+    "date": "2020-01-20",
+    "tags": ["JAX-RS", "REST", "Java", "Interceptors", "Filters"],
+    "excerpt": "This article explains how to pass parameters between JAX-RS WriterInterceptor and ReaderInterceptor."
+  },
+
+
+  {
+    "type": "external",
+    "title": "Data Visualization for analyzing big data set",
+    "url": "https://medium.com/@dimuthcse/data-visualization-for-analyzing-big-data-set-ce071c2304e3",
+    "source": "Medium",
+    "date": "2016-12-25",
+    "tags": ["data-visualisation", "analytics", "big-data", "d3js"],
+    "excerpt": "This article will describe a project I did as an intern at WSO2."
+  },
+
+  {
+    "type": "external",
+    "title": "A Deep Dive of Transaction Risk Analysis for Open Banking and PSD2",
+    "url": "https://wso2.com/articles/2019/05/a-deep-dive-of-transaction-risk-analysis-for-open-banking-and-psd2/",
+    "source": "WSO2 Library",
+    "date": "2019-05-12",
+    "tags": ["TRA", "psd2", "Open Banking", "fraud-detection"],
     "excerpt": "Understanding TRA concepts, risk signals, and how banks can integrate fraud detection into OB flows."
   },
   {
-    "type": "internal",
-    "title": "Scaling API gateways: lessons from WSO2 Open Banking deployments",
-    "slug": "scaling-api-gateways-open-banking",
-    "source": "dimuth.dev",
-    "date": "2024-11-12",
-    "tags": ["api-gateway", "wso2", "performance"],
-    "excerpt": "Throughput tuning, SLOs, and the real-world trade-offs behind latency and reliability at scale."
+    "type": "external",
+    "title": "Why Banks Should Consider Becoming Third Party Providers",
+    "url": "https://wso2.com/library/articles/why-banks-should-consider-becoming-third-party-providers/",
+    "source": "WSO2 Library",
+    "date": "2021-06-26",
+    "tags": ["banking", "tpp", "strategy", "open-banking", "psd2"],
+    "excerpt": "This article discusses the strategic advantages for banks in becoming Third Party Providers (TPPs) in the Open Banking ecosystem."
   },
   {
-    "type": "external",
-    "title": "Why banks should consider becoming Third Party Providers (TPPs)",
-    "url": "https://wso2.com/library/article/why-banks-should-become-tpps/",
-    "source": "WSO2 Library",
-    "date": "2021-05-09",
-    "tags": ["banking", "tpp", "strategy"],
-    "excerpt": "Exploring opportunities for banks to play as TPPs in the Open Banking ecosystem."
+    "type": "internal",
+    "title": "Practical Data Mining with Python",
+    "slug": "practical-data-mining-with-python",
+    "source": "dimuth.dev",
+    "date": "2017-05-30",
+    "tags": ["Data Mining", "Python", "Scikit-Learn", "Machine Learning", "Pandas"],
+    "excerpt": "A hands-on guide to data mining using Python, covering essential libraries and techniques."
   }
 ]
 
