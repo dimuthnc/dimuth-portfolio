@@ -108,7 +108,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
               </div>
             ) : null}
           </header>
-          <div className="prose prose-neutral dark:prose-invert max-w-none">
+          <div className="prose prose-neutral dark:prose-invert max-w-none break-words prose-a:break-words prose-pre:overflow-x-auto prose-pre:max-w-full prose-code:break-words prose-table:block prose-table:w-full prose-table:overflow-x-auto prose-img:max-w-full prose-img:h-auto">
             <MDXRemote
               source={content}
               options={{ mdxOptions: { remarkPlugins: [remarkGfm], rehypePlugins: [rehypeSlug] } }}
@@ -144,7 +144,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   }
 
   return (
-    <article className="prose prose-neutral dark:prose-invert max-w-none">
+    <article className="prose prose-neutral dark:prose-invert max-w-none break-words prose-a:break-words prose-pre:overflow-x-auto prose-pre:max-w-full prose-code:break-words prose-table:block prose-table:w-full prose-table:overflow-x-auto prose-img:max-w-full prose-img:h-auto">
       <h1 className="mb-2 text-2xl font-semibold tracking-tight">{post.title}</h1>
       <p className="text-sm text-muted-foreground">{dateStr} • {post.source}</p>
       <div className="mt-3 flex flex-wrap gap-2">
