@@ -1,0 +1,102 @@
+---
+title: Practical Data Mining with Python- Part 2
+date: 2017-07-05
+tags:
+  - Python
+  - Data Mining
+  - Machine Learning
+  - Pandas
+  - Scikit-Learn
+description:
+---
+
+## Overview
+
+In the previous part of [this blog post series](/practical-data-mining-with-python), we discussed on how we can use pandas library for data mining with python. In this post we will discuss how to select best features to be included in a prediction model.
+
+## Data Analyzing with Pandas
+
+Datasets may contain large number of features(columns) describing a particular data instance(row). Including all of them in a machine learning model will mislead the model. To produce outputs that are closer to the expected outputs, we need to select features that are more relevant or having considerable impact on output feature. In this post we are using correlation checking method to select features. There are many other methods that are used to select features other than this. This is one of the simplest,basic and easy to use method.
+
+For the demonstration purposes I’m using [this](https://www.drivendata.org/competitions/44/dengai-predicting-disease-spread/) dataset taken from drivenData. Anybody can download given data after registering as a competitor in the competition. Those who don’t want to register to that competition can download [training features set](https://gist.github.com/dimuthnc/1d0ecaa495692bd33704e2ce8e61a7ad) and [training labels set](https://gist.github.com/dimuthnc/24f99ce191bcc12a6142f2f561be2c58) from the given links.
+
+First we need to load the content in the data files to the program. I’m using pandas library for this. Syntax was explained in my [previous post](https://gist.github.com/dimuthnc/24f99ce191bcc12a6142f2f561be2c58
+
+
+> train_features = pd.read_csv('Data/dengue_features_train.csv',
+> index_col=[0,1,2])
+
+
+> train_labels = pd.read_csv('Data/dengue_labels_train.csv',
+> index_col=[0,1,2])
+
+Note that I have indexed files from first three columns to identify unique columns in two files. This dataset consists of data corresponding to two cities, San Juan and Iquitos. index that built on the previous step can be used to separate data from two cities into two variables( pandas data frames) for each city.
+
+Note that in this dataset, features that are useful for prediction are included in dengue_features_train file and output(number of dengue cases) included in the dengue_labels_train file.
+
+Seperate data for San Juan
+
+> sj_train_features = train_features.loc['sj']
+> sj_train_labels = train_labels.loc['sj']
+
+Separate data for Iquitos
+
+> iq_train_features = train_features.loc['iq']
+> iq_train_labels = train_labels.loc['iq']
+
+Though we conduct this procedure to identify relevant features, sometimes there are some columns that can identified by just inspection as they are irrelevant for a particular prediction model. We can get rid of such column easily instead of overloading correlation model. We can identify ‘week_start_date’ as obviously irrelevant. So we remove that from our data frames.
+
+
+> sj_train_features.drop('week_start_date', axis=1, inplace=True)
+> iq_train_features.drop('week_start_date', axis=1, inplace=True)
+
+Then we need to fill missing values as we discussed in our previous post. We will be using forward filling to fill missing values as below
+
+
+> sj_train_features.fillna(method='ffill', inplace=True)
+> iq_train_features.fillna(method='ffill', inplace=True)
+
+As we mentioned before, target feature(output feature) and other features are in two separated data frames. We need to combine this to check correlation between features. We can do this as below.
+
+
+> sj_train_features['total_cases'] = sj_train_labels.total_cases
+> iq_train_features['total_cases'] = iq_train_labels.total_cases
+
+Below code segment will calculate correlation between each two features.
+
+> sj_correlations = sj_train_features.corr()
+> iq_correlations = iq_train_features.corr()
+
+Now we only have to visualize the correlations to get a good understanding. It is easy compare correlations with the use of bar chart. Below code will generate a bar chart so that each features can be compared easily on correlation.
+
+> (sj_correlations
+> .total_cases
+> .drop('total_cases') # don't compare with myself
+> .sort_values(ascending=False)
+> .plot
+> .barh())
+
+> (iq_correlations
+> .total_cases
+> .drop('total_cases') # don't compare with myself
+> .sort_values(ascending=False)
+> .plot
+> .barh())
+
+All the above code can be found in [this github gist](https://gist.github.com/dimuthnc/189678f059ded7b7513f8f074e6b942f). This works properly in Spider IDE.
+
+These are the results that we got for two cities
+
+San Juan
+
+[SJ](../../public/images/blog/sj.png)
+
+Iquitos
+
+[IQ](../../public/images/blog/iq.png)
+
+Based on this, we can select features with highest correlation with total_cases. As an example, for iquitos “station_min_temp_c”,”reanalysis_min_air_temp_k”, “reanalysis_dew_point_temp_k” and “reanalysis_specific_humidity_g_per_kg” can be considered as the best four features to use in a model.
+
+This is the end of this post. If you have any problems, feel free contact me via the contact page. I will reply them as soon as possible.
+
+
