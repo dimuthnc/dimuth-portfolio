@@ -83,6 +83,15 @@
     "date": "2017-05-30",
     "tags": ["Data Mining", "Python", "Scikit-Learn", "Machine Learning", "Pandas"],
     "excerpt": "A hands-on guide to data mining using Python, covering essential libraries and techniques."
+  },
+  {
+    "type": "internal",
+    "title": "Practical Data Mining with Python - Part 2",
+    "slug": "practical-data-mining-with-python-part-2",
+    "source": "dimuth.dev",
+    "date": "2017-05-30",
+    "tags": ["Data Mining", "Python", "Scikit-Learn", "Machine Learning", "Pandas"],
+    "excerpt": "A continuation of the hands-on guide to data mining using Python, exploring advanced techniques and applications."
   }
 ]
 
