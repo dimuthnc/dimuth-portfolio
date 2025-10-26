@@ -89,9 +89,28 @@
     "title": "Practical Data Mining with Python - Part 2",
     "slug": "practical-data-mining-with-python-part-2",
     "source": "dimuth.dev",
-    "date": "2017-05-30",
+    "date": "2017-07-05",
     "tags": ["Data Mining", "Python", "Scikit-Learn", "Machine Learning", "Pandas"],
     "excerpt": "A continuation of the hands-on guide to data mining using Python, exploring advanced techniques and applications."
+  },
+  {
+    "type": "internal",
+    "title": "Practical Data Mining with Python - Part 3",
+    "slug": "practical-data-mining-with-python-part-3",
+    "source": "dimuth.dev",
+    "date": "2017-08-05",
+    "tags": ["Data Mining", "Python", "Scikit-Learn", "Machine Learning", "Pandas"],
+    "excerpt": "A further exploration into data mining with Python, focusing on model evaluation and optimization."
+  },
+  {
+    "type": "internal",
+    "title": "How to find architecture of your PC in Ubuntu",
+    "slug": "pc-architecture-ubuntu,",
+    "source": "dimuth.dev",
+    "date": "2017-01-09",
+    "tags": [ "ubuntu", "linux", "pc-architecture", "terminal-commands"],
+    "excerpt": "A quick guide on how to determine your PC's architecture using terminal commands in Ubuntu."
   }
+
 ]
 

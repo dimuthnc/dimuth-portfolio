@@ -1,0 +1,205 @@
+---
+title: Practical Data Mining with Python- Part 3
+date: 2017-08-05
+tags:
+  - Python
+  - Data Mining
+  - Machine Learning
+  - Pandas
+  - Scikit-Learn
+description: A further exploration into data mining with Python, focusing on model evaluation and optimization.
+---
+
+## Overview
+
+Since we have discussed how to use the **pandas** library for data pre-processing and correlation checking with **scikit-learn**, we can now continue our discussion on predicting the future based on historical data.
+
+We will be using the same dataset from the **DrivenData** website in this discussion too. Apart from the datasets we used in the [previous post](/blog/practical-data-mining-with-python) (training features set and training labels set), we will be using the [testing features set](https://gist.github.com/dimuthnc/2e8ea68aa5e87d4b3a2e6edf57a4abfb) and [submission format](https://gist.github.com/dimuthnc/fc047e41e29e41df53a72506bb0e56b8) in this tutorial.
+All of these can be downloaded from [this competition on the DrivenData website](https://www.drivendata.org/competitions/44/dengai-predicting-disease-spread/) for data mining competitions.
+
+
+From the [previous post](/blog/practical-data-mining-with-python-PART-2), we have identified some features that have higher correlation with the number of reported dengue cases compared to the others.
+
+For the city of **San Juan, Puerto Rico (SJ)**, highly correlated features are:
+- `reanalysis_specific_humidity_g_per_kg`
+- `reanalysis_dew_point_temp_k`
+- `station_avg_temp_c`
+- `reanalysis_max_air_temp_k`
+
+And for **Iquitos, Peru (IQ)**, the most correlated four features are:
+- `reanalysis_specific_humidity_g_per_kg`
+- `reanalysis_dew_point_temp_k`
+- `reanalysis_min_air_temp_k`
+- `station_min_temp_c`
+
+Following sections will describe the code in this GitHub Gist.
+➡️ _[https://gist.github.com/dimuthnc/4027420e54b109eb81815b41f98c821e]_
+
+---
+
+## Loading and Preparing the Data
+
+Now we have a set of features and datasets with us, we can focus on building a Machine Learning model to predict future dengue cases.
+
+As usual, we load the training dataset into the application using the `pandas.read_csv()` function and then fill the missing values (lines 31–32).
+Here, we use the **forward filling** method for simplicity. Forward filling is more suitable for **time series prediction** scenarios like this, where the most recent values are used to fill missing values.
+
+```python
+df = pd.read_csv('Data/lag_dengue_features_train.csv', index_col=[0, 1, 2])
+df.fillna(method='ffill', inplace=True)
+```
+
+Then we need to filter out data for each city, as we are going to build separate Machine Learning Models for two cities.
+All features apart from the selected ones will be removed from the DataFrame as below.
+
+```python
+sj = df.loc['sj']
+iq = df.loc['iq']
+
+features_sj = [
+    'reanalysis_specific_humidity_g_per_kg',
+    'reanalysis_dew_point_temp_k',
+    'station_avg_temp_c',
+    'reanalysis_max_air_temp_k'
+]
+features_iq = [
+    'reanalysis_specific_humidity_g_per_kg',
+    'reanalysis_dew_point_temp_k',
+    'reanalysis_min_air_temp_k',
+    'station_min_temp_c'
+]
+
+sj = sj[features_sj]
+iq = iq[features_iq]
+```
+
+Then we need to do the same for the **test dataset**.
+The following code (lines 43–50) handles that:
+
+```python
+df_test = pd.read_csv('Data/lag_dengue_features_test.csv', index_col=[0, 1, 2])
+df_test.fillna(method='ffill', inplace=True)
+
+sj_test = df_test.loc['sj']
+iq_test = df_test.loc['iq']
+
+sj_test = sj_test[features_sj]
+iq_test = iq_test[features_iq]
+```
+
+Next, the labels or expected results of the training data are loaded for use with their corresponding training data to train the model.
+
+```python
+df_labels = pd.read_csv('Data/lag_dengue_labels_train.csv', index_col=[0, 1, 2])
+sj_labels = df_labels.loc['sj']
+iq_labels = df_labels.loc['iq']
+```
+
+---
+
+## Evaluating Models
+
+Since we now have all the necessary data loaded, we can proceed to evaluating different models for the best set of parameters.
+We will use those parameters (`alpha` in this scenario) to create a better model and produce predictions for the test data.
+
+To evaluate a model, we will use the `evaluate` method (lines 6–29 in the code):
+
+```python
+def evaluate(train_set, features, a):
+    total_score = 0
+    for x in range(10):
+        train, test = train_test_split(train_set, train_size=0.8)
+        train_data = train[features]
+        train_target = train.total_cases
+        test_data = test[features]
+        test_target = test['total_cases']
+        testModel = linear_model.Lasso(alpha=a)
+        testModel.fit(train_data, train_target)
+        test_results = testModel.predict(test_data)
+        test_results = [int(round(i)) for i in test_results]
+        MAE = 0
+        for index in range(0, len(test_results)):
+            MAE += abs(test_results[index] - test_target[index])
+        total_score += (MAE / float(len(test_results)))
+    return total_score / 10.0
+```
+
+### Function Explanation
+
+This function takes a dataset, feature set, and an alpha value, and produces an **average score** to measure model accuracy with that alpha value.
+
+- `total_score` stores the cumulative MAE values.
+- The function loops **10 times**, evaluating similar models each time (you can adjust this number).
+- The dataset is split into **train** and **test** sets using `train_test_split`.
+- Features and target values are separated.
+- A **Lasso Regression** model (`linear_model.Lasso`) is trained and tested.
+➡️ _[https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Lasso.html]_
+➡️ _[https://www.youtube.com/watch?v=jbwSCwoT51M]_
+- Predictions are generated and evaluated using **Mean Absolute Error (MAE)**.
+
+---
+
+## Finding the Best Alpha Value
+
+Now that we know how `evaluate()` works, let’s look at how it is used.
+
+We define a set of possible alpha values as a list, and initialize best score and alpha for both cities:
+
+```python
+alphas = [0.1, 0.01, 0.001, 0.0001, 0.00001, 0.000001, 0.0000001, 0.00000001]
+bestScore_sj = 1000
+bestScore_iq = 1000
+bestAlpha_sj = 0.1
+bestAlpha_iq = 0.1
+```
+
+Then we loop through alpha values and evaluate models for each city:
+
+```python
+for alpha in alphas:
+    sj_score = evaluate(sj.join(sj_labels), features_sj, alpha)
+    if sj_score < bestScore_sj:
+        bestScore_sj = sj_score
+        bestAlpha_sj = alpha
+
+    iq_score = evaluate(iq.join(iq_labels), features_iq, alpha)
+    if iq_score < bestScore_iq:
+        bestScore_iq = iq_score
+        bestAlpha_iq = alpha
+```
+
+---
+
+## Building and Using the Final Model
+
+Now that we know the best alpha values for each city dataset, we can create final models to predict test data values:
+
+```python
+model_sj = linear_model.Lasso(alpha=bestAlpha_sj)
+model_iq = linear_model.Lasso(alpha=bestAlpha_iq)
+
+model_sj.fit(sj.values, sj_labels.total_cases)
+model_iq.fit(iq.values, iq_labels.total_cases)
+
+results_sj = model_sj.predict(sj_test)
+results_iq = model_iq.predict(iq_test)
+```
+
+Now we have predicted results that need to be saved as outputs according to the competition requirements.
+
+We join the results from both cities, round the values to integers, and convert any negatives to 0 (since dengue cases cannot be negative).
+
+Finally, we load the submission format and save our results to a file for evaluation.
+
+---
+
+## Conclusion
+
+This concept of **loading data**, **evaluating for best configurations**, and **building models** can be used with most algorithms.
+Keeping this structure consistent across algorithms simplifies many tasks.
+
+In upcoming posts, we will discuss more algorithms while improving the model — such as adding **lagged values**, **complex features**, and other enhancements.
+
+
+
+
