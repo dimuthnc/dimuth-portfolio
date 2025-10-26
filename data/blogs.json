@@ -45,6 +45,15 @@
     "tags": ["JAX-RS", "REST", "Java", "Interceptors", "Filters"],
     "excerpt": "This article explains how to pass parameters between JAX-RS WriterInterceptor and ReaderInterceptor."
   },
+  {
+    "type": "external",
+    "title": "Passing parameters between JAX-RS WriterInterceptor and ReaderInterceptor",
+    "url": "https://medium.com/@dimuthcse/passing-parameters-between-jax-rs-writerinterceptor-and-readerinterceptor-9e63f781d95",
+    "source": "Medium",
+    "date": "2020-01-20",
+    "tags": ["JAX-RS", "REST", "Java", "Interceptors", "Filters"],
+    "excerpt": "This article explains how to pass parameters between JAX-RS WriterInterceptor and ReaderInterceptor."
+  },
 
 
   {
@@ -70,7 +79,7 @@
     "type": "external",
     "title": "Why Banks Should Consider Becoming Third Party Providers",
     "url": "https://wso2.com/library/articles/why-banks-should-consider-becoming-third-party-providers/",
-    "source": "WSO2 Library",
+    "source": "dimuth.dev",
     "date": "2021-06-26",
     "tags": ["banking", "tpp", "strategy", "open-banking", "psd2"],
     "excerpt": "This article discusses the strategic advantages for banks in becoming Third Party Providers (TPPs) in the Open Banking ecosystem."
@@ -104,13 +113,13 @@
   },
   {
     "type": "internal",
+
     "title": "How to find architecture of your PC in Ubuntu",
     "slug": "pc-architecture-ubuntu",
-    "source": "dimuth.dev",
+    "source": "dimuthmenikgama.com",
     "date": "2017-01-09",
     "tags": [ "ubuntu", "linux", "pc-architecture", "terminal-commands"],
     "excerpt": "A quick guide on how to determine your PC's architecture using terminal commands in Ubuntu."
   }
 
 ]
-

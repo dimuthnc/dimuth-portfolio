@@ -1,50 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://localhost:3000/</loc>
-    <lastmod>2025-10-20T12:49:34.954Z</lastmod>
+    <loc>https://dimuthmenikgama.com/</loc>
+    <lastmod>2025-10-26T15:54:54.367Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>http://localhost:3000/about</loc>
-    <lastmod>2025-10-20T12:49:34.955Z</lastmod>
+    <loc>https://dimuthmenikgama.com/about</loc>
+    <lastmod>2025-10-26T15:54:54.368Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://localhost:3000/blog</loc>
-    <lastmod>2025-10-20T12:49:34.955Z</lastmod>
+    <loc>https://dimuthmenikgama.com/blog</loc>
+    <lastmod>2025-10-26T15:54:54.368Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://localhost:3000/portfolio</loc>
-    <lastmod>2025-10-20T12:49:34.955Z</lastmod>
+    <loc>https://dimuthmenikgama.com/portfolio</loc>
+    <lastmod>2025-10-26T15:54:54.368Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://localhost:3000/contact</loc>
-    <lastmod>2025-10-20T12:49:34.955Z</lastmod>
+    <loc>https://dimuthmenikgama.com/contact</loc>
+    <lastmod>2025-10-26T15:54:54.368Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://localhost:3000/blog/practical-data-mining-with-python</loc>
-    <lastmod>2025-10-20T12:49:34.955Z</lastmod>
+    <loc>https://dimuthmenikgama.com/blog/practical-data-mining-with-python</loc>
+    <lastmod>2025-10-26T15:54:54.368Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://localhost:3000/blog/practical-data-mining-with-python-part-2</loc>
-    <lastmod>2025-10-20T12:49:34.955Z</lastmod>
+    <loc>https://dimuthmenikgama.com/blog/practical-data-mining-with-python-part-2</loc>
+    <lastmod>2025-10-26T15:54:54.368Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://localhost:3000/blog/resilient-integration-platform-camel-kafka</loc>
-    <lastmod>2025-10-20T12:49:34.955Z</lastmod>
+    <loc>https://dimuthmenikgama.com/blog/practical-data-mining-with-python-part-3</loc>
+    <lastmod>2025-10-26T15:54:54.368Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://dimuthmenikgama.com/blog/pc-architecture-ubuntu</loc>
+    <lastmod>2025-10-26T15:54:54.368Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://dimuthmenikgama.com/blog/resilient-integration-platform-camel-kafka</loc>
+    <lastmod>2025-10-26T15:54:54.368Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

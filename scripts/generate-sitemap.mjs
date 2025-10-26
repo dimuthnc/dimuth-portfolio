@@ -2,7 +2,7 @@ import { readFile, writeFile, readdir } from 'node:fs/promises'
 import { existsSync } from 'node:fs'
 import path from 'node:path'
 
-const siteUrl = process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+const siteUrl = process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL || 'https://dimuthmenikgama.com'
 
 const routes = ['/', '/about', '/blog', '/portfolio', '/contact']
 
@@ -55,4 +55,3 @@ main().catch((e) => {
   console.error('Failed to generate sitemap:', e)
   process.exit(0)
 })
-

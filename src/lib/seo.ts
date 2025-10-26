@@ -5,7 +5,7 @@
  * Set NEXT_PUBLIC_SITE_URL in env for production (e.g., https://example.com).
  */
 export function getSiteUrl(): URL {
-  const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim() || "http://localhost:3000";
+  const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://dimuthmenikgama.com";
   // Ensure no trailing slash to avoid double slashes when resolving paths
   const base = raw.replace(/\/+$/, "");
   return new URL(base);
@@ -25,4 +25,3 @@ export function canonical(path: string = "/"): string {
  * Default Open Graph/Twitter image. This is a path under /public resolved via metadataBase.
  */
 export const defaultOgImage = "/images/avatar.jpg";
-

@@ -55,7 +55,7 @@ Create a `.env.local` in project root. Example:
 NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/your-id
 
 # Optional: used by sitemap/robots generation (scripts/generate-sitemap.mjs)
-# Will fall back to http://localhost:3000 if not provided
+# Will fall back to https://dimuthmenikgama.com if not provided
 NEXT_PUBLIC_SITE_URL=https://your-domain.com
 # or
 SITE_URL=https://your-domain.com
@@ -96,7 +96,7 @@ Option A: Git integration (recommended)
    - Build Command: `npm run build`
 5) Environment Variables (Project Settings → Environment Variables):
    - `NEXT_PUBLIC_FORMSPREE_ENDPOINT` = your Formspree endpoint
-   - Optional: `NEXT_PUBLIC_SITE_URL` (or `SITE_URL`) = your production URL
+   - Optional: `NEXT_PUBLIC_SITE_URL` (or `SITE_URL`) = your production URL (e.g., https://dimuthmenikgama.com)
 6) Deploy
 
 Option B: Vercel CLI
