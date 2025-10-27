@@ -1,32 +1,33 @@
 [
   {
     "kind": "site",
-    "title": "JWT Decoder",
-    "description": "A fast, client-side JWT inspector with signature hints.",
-    "url": "https://jwt.dimuth.dev",
+    "title": "Expense Manager Application",
+    "description": "A full-stack expense manager application that works offline and built with HTML, CSS and Vanila JavaScript.",
+    "url": "https://personal-expense-manager.pages.dev",
     "secondaryUrl": "https://github.com/dimuthnc/jwt-decoder",
-    "tags": ["Security", "JWT", "React"],
-    "thumbnail": "/images/projects/jwt.png",
-    "date": "2024-11-10",
+    "tags": ["HTML","CSS", "JavaScript"],
+    "thumbnail": "/images/projects/em.png",
+    "date": "2025-10-01",
+    "pinned": true
+  },
+  {
+    "kind": "site",
+    "title": "Portfolio v2",
+    "description": "Second iteration of my personal site.",
+    "url": "https://dimuthmenikgama.com",
+    "secondaryUrl": "https://github.com/dimuthnc/dimuth-portfolio",
+    "tags": ["NextJS","TypeScript", "MDX", "Tailwind"],
+    "thumbnail": "/images/projects/portfolio.png",
+    "date": "2025-10-15",
     "pinned": true
   },
   {
     "kind": "repo",
-    "title": "Base64 Toolkit",
-    "description": "Utilities for Base64 encoding/decoding in browser and Node.",
-    "url": "https://github.com/dimuthnc/base64-toolkit",
-    "tags": ["TypeScript", "Utilities"],
-    "thumbnail": "/images/projects/base64.png",
-    "date": "2023-08-01",
-    "pinned": false
-  },
-  {
-    "kind": "site",
-    "title": "Portfolio v1",
-    "description": "First iteration of my personal site.",
-    "url": "https://dimuth.dev",
-    "tags": ["Next.js", "Tailwind"],
-    "date": "2022-06-15",
+    "title": "REST API for converting JSON to AVRO",
+    "description":  "A simple REST API built with Java and SpringBoot that converts JSON data to AVRO format when the schema is given",
+    "url": "https://github.com/dimuthnc/json-to-avro-converter",
+    "tags": ["Java","Spring-Boot", "Apache Camel"],
+    "date": "2024-12-22",
     "pinned": false
   }
 ]
