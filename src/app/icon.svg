@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- background -->
+  <rect width="512" height="512" rx="84" fill="#0C1424"></rect>
+  <!-- D outline -->
+  <path d="M144 128h128c92 0 152 52 152 128s-60 128-152 128H144V128z" fill="none" stroke="#34D399" stroke-width="26" stroke-linejoin="round"></path>
+  <!-- keyhole -->
+  <circle cx="316" cy="256" r="26" fill="#34D399"></circle>
+  <path d="M316 282c-13 0-22 9-22 22v22h44v-22c0-13-9-22-22-22z" fill="#34D399"></path>
+  <!-- subtle accent dot (brand spark) -->
+  <circle cx="164" cy="164" r="7" fill="#FBBF24"></circle>
+</svg>
+
