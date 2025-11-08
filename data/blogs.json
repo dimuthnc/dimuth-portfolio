@@ -120,6 +120,16 @@
     "date": "2017-01-09",
     "tags": [ "ubuntu", "linux", "pc-architecture", "terminal-commands"],
     "excerpt": "A quick guide on how to determine your PC's architecture using terminal commands in Ubuntu."
+  },
+  {
+    "type": "internal",
+
+    "title": "A Simple Local Kafka Setup Using Docker Compose",
+    "slug": "kafka-docker-compose-setup-blog",
+    "source": "dimuthmenikgama.com",
+    "date": "2025-11-08",
+    "tags": ["Kafka", "Docker", "Zookeeper", "Dev Tools"],
+    "excerpt": "A step-by-step guide to setting up a local Kafka environment using Docker Compose for development and testing purposes."
   }
 
 ]

@@ -1,0 +1,154 @@
+---
+title: "A Simple Local Kafka Setup Using Docker Compose"
+date: 2025-11-08
+description: "How to run a lightweight, persistent Kafka cluster locally on macOS using Docker Compose and Kafka UI."
+tags: ["Kafka", "Docker", "Zookeeper", "Dev Tools"]
+---
+
+## Introduction
+
+This post is about setting up a **lightweight Kafka cluster locally** using Docker Compose — something that can be reused across projects for quick event-driven testing or development.  
+I built this setup to make it easier to spin up Kafka without depending on Docker Desktop or heavy scripts. It's minimal, persistent, and ARM-compatible (for Apple M1/M2 users).
+
+One of my intentions for writing this post is to use it as a **reference README for myself** in the future — whenever I need to re-setup or troubleshoot this local Kafka environment.  
+If you work with Kafka often, you’ll find this setup incredibly handy as a reusable tool.
+
+---
+
+## Prerequisites
+
+Before you start, make sure your environment has the following tools installed and working correctly:
+
+1. **Docker Engine or Colima**
+    - On macOS, I prefer Colima instead of Docker Desktop.  
+      Install it with Homebrew:
+      ```bash
+      brew install docker colima
+      colima start
+      ```
+
+2. **Docker Compose**  
+   Check installation:
+   ```bash
+   docker-compose --version
+   ```
+
+3. **Git (optional)**  
+   If you want to clone and reuse this setup:
+   ```bash
+   git clone https://github.com/dimuthnc/kafka-developer-setup.git
+   cd kafka-developer-setup
+   ```
+
+Once these are ready, you can directly run the Docker Compose file to start your local Kafka cluster.
+
+---
+
+## Starting the Cluster Cleanly
+
+To ensure a clean environment before running Kafka, I recommend the following three commands:
+
+```bash
+docker-compose down -v
+docker system prune -f
+docker-compose up -d
+```
+
+- `docker-compose down -v` removes any existing containers and associated volumes (to ensure a clean state).
+- `docker system prune -f` removes unused images and networks.
+- `docker-compose up -d` rebuilds and starts everything fresh in detached mode.
+
+After a few seconds, run:
+
+```bash
+docker ps
+```
+
+You should see three running containers:  
+`zookeeper`, `kafka`, and `kafka-ui`.
+
+---
+
+## Accessing Kafka UI
+
+Once all containers are up, open your browser and navigate to:
+
+👉 [http://localhost:8080](http://localhost:8080)
+
+You’ll see the **Kafka UI dashboard** powered by [Provectus Labs Kafka UI](https://github.com/provectus/kafka-ui).
+
+Here’s what you can do:
+
+- **View existing topics**  
+  Click on the “Topics” tab to see all available topics in the local broker.
+
+- **Create new topics**  
+  Click “Create Topic”, give it a name (e.g., `test-topic`), and save.
+
+- **Publish messages**  
+  Go to your topic → “Messages” tab → click “Produce Message” → enter your payload and send.
+
+- **Consume messages**  
+  In the same tab, click “View Messages” to read messages from the beginning.
+
+This interface is an excellent way to visualize and interact with Kafka without writing CLI commands.
+
+---
+
+## Troubleshooting
+
+If something doesn’t work as expected, here’s how to debug:
+
+### 1. Check container statuses
+
+```bash
+docker ps
+```
+
+If one of them isn’t running, inspect its logs.
+
+### 2. View logs
+
+```bash
+docker logs kafka -f
+docker logs zookeeper -f
+docker logs kafka-ui -f
+```
+
+These will stream live logs and often reveal configuration or connection issues.
+
+### 3. Restart Colima (if using macOS)
+
+Sometimes Docker socket or network bridge issues occur. Restart Colima:
+
+```bash
+colima stop
+colima start
+```
+
+### 4. Rebuild from scratch (if all else fails)
+
+```bash
+docker-compose down -v
+docker system prune -f
+docker-compose up -d
+```
+
+If the setup still fails, verify ports (`2181`, `9092`, `8080`) aren’t already in use, and make sure the advertised listeners in `docker-compose.yml` are:
+
+```yaml
+KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+```
+
+---
+
+## Conclusion
+
+This simple Kafka + Zookeeper + Kafka UI setup is part of my daily development workflow. It helps me quickly test Kafka-based event flows without depending on external infrastructure.
+
+The repository is open source, so others can use it or adapt it as a base for their own Kafka setups.  
+If you find it useful, feel free to fork, improve, and contribute!
+
+---
+_Authored by Dimuth Menikgama_  
+_Linked to the open-source Kafka Local Dev setup repository._
