@@ -52,3 +52,23 @@ jobs:
           path: .next
           include-hidden-files: true
           if-no-files-found: error
+
+  enforce-branch-name:
+    name: Enforce branch naming
+    runs-on: ubuntu-latest
+    # Run for PRs into main and for direct pushes (except main itself)
+    if: github.event_name == 'pull_request' || github.ref != 'refs/heads/main'
+    steps:
+      - name: Check branch name matches allowed pattern (feature/<short-description>)
+        shell: bash
+        run: |
+          BRANCH_NAME="${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
+          echo "Branch name: $BRANCH_NAME"
+
+          if [[ ! "$BRANCH_NAME" =~ ^feature/.+ ]]; then
+            echo "❌ Branch name does not follow the required pattern: feature/<short-description>"
+            echo "Please rename your branch to: feature/<short-description>"
+            exit 1
+          fi
+
+          echo "✅ Branch name is valid."
