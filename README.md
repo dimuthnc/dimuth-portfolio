@@ -136,6 +136,9 @@ vercel.json
 - Sitemap has localhost URLs
   - Set `NEXT_PUBLIC_SITE_URL` or `SITE_URL` before building
 
+## Contributing
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ---
 
 
