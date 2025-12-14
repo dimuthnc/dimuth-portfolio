@@ -39,6 +39,13 @@ export async function getAllMdxSlugs(): Promise<string[]> {
 
 export async function getMdxPost(slug: string): Promise<MdxPost | null> {
   const filePath = path.join(BLOG_DIR, `${slug}.mdx`)
+
+  // Security check: Prevent Path Traversal
+  const relative = path.relative(BLOG_DIR, filePath)
+  if (relative.startsWith('..') || path.isAbsolute(relative)) {
+    return null
+  }
+
   try {
     const raw = await fs.readFile(filePath, "utf-8")
     const { data, content } = matter(raw)

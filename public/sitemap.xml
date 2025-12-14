@@ -2,61 +2,73 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://dimuthmenikgama.com/</loc>
-    <lastmod>2025-10-26T15:54:54.367Z</lastmod>
+    <lastmod>2025-12-14T08:21:56.921Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://dimuthmenikgama.com/about</loc>
-    <lastmod>2025-10-26T15:54:54.368Z</lastmod>
+    <lastmod>2025-12-14T08:21:56.921Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://dimuthmenikgama.com/blog</loc>
-    <lastmod>2025-10-26T15:54:54.368Z</lastmod>
+    <lastmod>2025-12-14T08:21:56.921Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://dimuthmenikgama.com/portfolio</loc>
-    <lastmod>2025-10-26T15:54:54.368Z</lastmod>
+    <lastmod>2025-12-14T08:21:56.921Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://dimuthmenikgama.com/contact</loc>
-    <lastmod>2025-10-26T15:54:54.368Z</lastmod>
+    <lastmod>2025-12-14T08:21:56.921Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://dimuthmenikgama.com/blog/practical-data-mining-with-python</loc>
-    <lastmod>2025-10-26T15:54:54.368Z</lastmod>
+    <lastmod>2025-12-14T08:21:56.921Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://dimuthmenikgama.com/blog/practical-data-mining-with-python-part-2</loc>
-    <lastmod>2025-10-26T15:54:54.368Z</lastmod>
+    <lastmod>2025-12-14T08:21:56.921Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://dimuthmenikgama.com/blog/practical-data-mining-with-python-part-3</loc>
-    <lastmod>2025-10-26T15:54:54.368Z</lastmod>
+    <lastmod>2025-12-14T08:21:56.921Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://dimuthmenikgama.com/blog/pc-architecture-ubuntu</loc>
-    <lastmod>2025-10-26T15:54:54.368Z</lastmod>
+    <lastmod>2025-12-14T08:21:56.921Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://dimuthmenikgama.com/blog/kafka-docker-compose-setup-blog</loc>
+    <lastmod>2025-12-14T08:21:56.921Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://dimuthmenikgama.com/blog/introduction-to-kafka</loc>
+    <lastmod>2025-12-14T08:21:56.921Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://dimuthmenikgama.com/blog/resilient-integration-platform-camel-kafka</loc>
-    <lastmod>2025-10-26T15:54:54.368Z</lastmod>
+    <lastmod>2025-12-14T08:21:56.921Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
