@@ -17,6 +17,7 @@
     "@vercel/analytics": "^1.5.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "feed": "^5.1.0",
     "framer-motion": "^11.3.24",
     "github-slugger": "^2.0.0",
     "gray-matter": "^4.0.3",
