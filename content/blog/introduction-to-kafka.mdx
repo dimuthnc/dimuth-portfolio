@@ -13,8 +13,8 @@ As per the suggestions from some articles, it is indeed a distributed commit log
 3. Location of each record is constant and known. Therefore, can access easily
 
 ## Why Kafka
-With the distributed nature of modern day applications, it is often require to establish communication between different components or applications in an ecosystem. These components may be made with different technology stacks, by different teams and hence require different ways to connect.
-For simplicity, let's assume all components communicate via REST APIs over HTTP. Still, different components that export data will expose APIs with different schemas. This makes each client application becomes couple with these schemas for the communication.
+With the distributed nature of modern day applications, it is often requires to establish communication between different components or applications in an ecosystem. These components may be made with different technology stacks, by different teams and hence require different ways to connect.
+For simplicity, let's assume all components communicate via REST APIs over HTTP. Still, different components that export data will expose APIs with different schemas. This makes each client application becomes coupled with these schemas for the communication.
 For instance, consider an airline business with below components.
 
 ![Without Kafka](/images/blog/before-kafka.png)
@@ -50,7 +50,7 @@ Data is kept in topics for a limited time only. This is a configurable  time per
 ## Brokers
 Kafka cluster comprises multiple servers / nodes. These are called brokers in the kafka domain. Each broker is identified by an integer id.
 
-Each broker contains certain topic partitions. Ideally all the partitions of a particular topic is never resides within single broker ( unless cluster only has one broker).
+Each broker contains certain topic partitions. Ideally, all the partitions of a particular topic never reside within a single broker (unless the cluster only has one broker).
 
 More brokers means high amount of distribution. And this results in high resilient and fault tolerance.
 
@@ -117,7 +117,7 @@ A specific broker is assigned as the group coordinator to maintain a consumer gr
 This same group coordinator also responsible for save the consumed offsets ( Also known as offset commits). This data will be stored in internal topic named "__consumer_offsets". This topic also contains metadata about the consumer group. This allows group coordinator broker to fail and hand the responsibility to another broker.
 
 ### Group Rebalance
-Group Rebalance is an action taken by kafka where every group member forced to drop and rejoin the group. After rebalancing act, each consumer may receive a same of different partition(s) to consume. Based on the offset commit done before rebalancing act, it will continue to consume.
+Group Rebalance is an action taken by kafka where every group member forced to drop and rejoin the group. After rebalancing act, each consumer may receive a same or different partition(s) to consume. Based on the offset commit done before rebalancing act, it will continue to consume.
 Rebalancing could be initiated due to several reasons such as,
 
 1. A Consumer Joins the group
@@ -134,7 +134,7 @@ If the response from the coordinator for the heartbeat  indicates a rebalance is
 ## Controllers
 Brokers also require some sort of coordination as they are also distributed. Broker coordination is achieved using a specific brokers called controllers.
 At any given time, there will be only one "Active Controller". The other controllers are called standby controllers.
-Controllers are responsible for many things. One of the main such responsibility is handling broker failures. If a broker failed, partition leaderships may require to reassign.
+Controllers are responsible for many things. One of the main such responsibility is handling broker failures. If a broker failed, partition leaderships may need to be reassigned.
 All the metadata related to cluster is stored in a special kafka topic ( which replicates over all controllers).
 
 ## References
