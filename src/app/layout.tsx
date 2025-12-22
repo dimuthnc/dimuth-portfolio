@@ -29,6 +29,11 @@ export const metadata: Metadata = {
     "Senior Software Engineer @ Crédit Agricole CIB. Building reliable platforms, APIs, and developer tools.",
   alternates: {
     canonical: "/",
+    types: {
+      "application/rss+xml": [
+        { url: "/rss.xml", title: "Dimuth Menikgamage – Blog RSS Feed" },
+      ],
+    },
   },
   openGraph: {
     type: "website",
