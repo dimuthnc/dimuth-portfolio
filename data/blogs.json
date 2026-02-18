@@ -133,12 +133,20 @@
   },
   {
     "type": "internal",
-
     "title": "An Introduction into Kafka World",
     "slug": "introduction-to-kafka",
     "source": "dimuthmenikgama.com",
     "date": "2025-12-14",
     "tags": ["Kafka", "Apache", "Partitions", "Topics", "Distributed", "Open Source"],
     "excerpt": "A comprehensive introduction to Apache Kafka, explaining core concepts like topics, partitions, brokers, and consumer groups."
+  },
+  {
+    "type": "internal",
+    "title": "Blueprint: Persist Kafka Audit Messages to Postgres with Kafka Connect (No Schema Registry Required)",
+    "slug": "kafka-postgresql-data-pipeline",
+    "source": "dimuthmenikgama.com",
+    "date": "2026-02-18",
+    "tags": ["Kafka", "Kafka Connect", "PostgreSQL", "Sink Connector", "SMT", "Docker Compose", "Event Streaming", "Data Engineering", "Performance", "Audit Logs", "Confluent"],
+    "excerpt": "A practical blueprint for reliably sinking high-volume Kafka audit messages into Postgres using Kafka Connect—boosting throughput from days to minutes with a lightweight SMT that adds the required schema without changing the existing data stream"
   }
 ]
