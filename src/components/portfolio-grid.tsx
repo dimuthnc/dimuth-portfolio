@@ -68,7 +68,7 @@ export function PortfolioGrid({ projects }: { projects: Project[] }) {
                   <span className="shrink-0 rounded-full border px-2 py-0.5 text-xs text-muted-foreground capitalize">{p.kind}</span>
                 </div>
                 {p.date ? (
-                  <div className="mt-1 text-xs text-muted-foreground">{new Date(p.date).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "2-digit" })}</div>
+                  <div className="mt-1 text-xs text-muted-foreground">{new Date(p.date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "2-digit" })}</div>
                 ) : null}
                 <p className="mt-3 text-sm text-muted-foreground/90 line-clamp-3">{p.description}</p>
 
