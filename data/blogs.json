@@ -140,5 +140,15 @@
     "date": "2025-12-14",
     "tags": ["Kafka", "Apache", "Partitions", "Topics", "Distributed", "Open Source"],
     "excerpt": "A comprehensive introduction to Apache Kafka, explaining core concepts like topics, partitions, brokers, and consumer groups."
+  },
+  {
+    "type": "internal",
+
+    "title": "S3 Manager — A Self-Hosted Web UI for Managing S3-Compatible Storage Buckets",
+    "slug": "s3-manager",
+    "source": "dimuthmenikgama.com",
+    "date": "2026-03-16",
+    "tags": ["s3", "docker", "open-source", "devops", "minio", "self-hosted"],
+    "excerpt": "S3 Manager is a self-hosted web UI designed to simplify the management of S3-compatible storage buckets, providing an intuitive interface for users to interact with their cloud storage resources."
   }
 ]

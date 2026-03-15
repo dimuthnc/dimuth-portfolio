@@ -11,7 +11,7 @@ import { ExternalLink } from "lucide-react"
 function formatDate(iso: string) {
   const d = new Date(iso)
   if (Number.isNaN(d.getTime())) return iso
-  return d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "2-digit" })
+  return d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "2-digit" })
 }
 
 export function BlogList({ posts }: { posts: BlogPost[] }) {

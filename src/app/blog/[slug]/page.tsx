@@ -75,7 +75,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     const date = new Date(frontmatter.date);
     const dateStr = isNaN(date.getTime())
       ? frontmatter.date
-      : date.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+      : date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 
     const articleLd = {
       "@context": "https://schema.org",
@@ -129,7 +129,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   if (!post) return notFound();
 
   const date = new Date(post.date);
-  const dateStr = isNaN(date.getTime()) ? post.date : date.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+  const dateStr = isNaN(date.getTime()) ? post.date : date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 
   const articleLd = {
     "@context": "https://schema.org",
