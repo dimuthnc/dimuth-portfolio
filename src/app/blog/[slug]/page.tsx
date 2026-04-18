@@ -13,9 +13,10 @@ import { loadProfile } from "@/lib/content";
 
 export const dynamic = "force-dynamic";
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const mdx = await getMdxPost(params.slug);
-  const base = canonical(`/blog/${params.slug}`)
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const mdx = await getMdxPost(slug);
+  const base = canonical(`/blog/${slug}`)
   if (mdx) {
     const { frontmatter } = mdx
     const title = frontmatter.title
@@ -42,7 +43,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     }
   }
   const posts = await loadBlogs();
-  const post = posts.find((p): p is InternalBlogPost => p.type === "internal" && p.slug === params.slug)
+  const post = posts.find((p): p is InternalBlogPost => p.type === "internal" && p.slug === slug)
   if (!post) return {}
   const title = post.title
   const description = post.excerpt
@@ -121,10 +122,11 @@ function ArticleHead({
   );
 }
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const profile = await loadProfile();
-  const mdx = await getMdxPost(params.slug);
-  const url = canonical(`/blog/${params.slug}`)
+  const mdx = await getMdxPost(slug);
+  const url = canonical(`/blog/${slug}`)
   if (mdx) {
     const { frontmatter, toc, content, readingTimeText } = mdx;
 
@@ -174,7 +176,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
 
   // Fallback to internal JSON-based minimal page
   const posts = await loadBlogs();
-  const post = posts.find((p): p is InternalBlogPost => p.type === "internal" && p.slug === params.slug);
+  const post = posts.find((p): p is InternalBlogPost => p.type === "internal" && p.slug === slug);
   if (!post) return notFound();
 
   const articleLd = {
