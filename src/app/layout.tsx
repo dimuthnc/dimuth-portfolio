@@ -3,13 +3,9 @@ import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
-import dynamic from "next/dynamic";
 import { getSiteUrl, defaultOgImage } from "@/lib/seo";
 import { Analytics } from "@vercel/analytics/next";
-
-const Toaster = dynamic(() => import("sonner").then((m) => ({ default: m.Toaster })), {
-  ssr: false,
-});
+import { ToasterClient } from "@/components/toaster-client";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -83,7 +79,7 @@ export default function RootLayout({
           >
             {children}
           </main>
-          <Toaster richColors position="top-center" />
+          <ToasterClient />
         </ThemeProvider>
         {/* Vercel Web Analytics */}
         <Analytics />
