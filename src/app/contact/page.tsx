@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { loadProfile } from "@/lib/content";
 import ContactForm from "@/components/contact-form";
 import { Mail, Phone } from "lucide-react";
@@ -26,43 +25,42 @@ export default async function ContactPage() {
   const phone = profile.phone;
 
   return (
-    <div className="space-y-8">
-      <header className="space-y-2">
-        <h1 className="text-2xl font-semibold tracking-tight">Contact</h1>
-        <p className="text-sm text-muted-foreground">I’d love to hear from you. Send me a message and I’ll get back to you.</p>
+    <div className="fx-shell fx-shell--narrow">
+      <header className="site-pagehead">
+        <p className="fx-eyebrow">
+          Contact{profile.city ? <><span className="fx-dot" aria-hidden />{profile.city}</> : null}
+        </p>
+        <h1 className="fx-title">Say hello.</h1>
+        <p className="fx-lead mt-4">I’d love to hear from you. Send me a message and I’ll get back to you.</p>
       </header>
 
       <section aria-labelledby="contact-direct">
         <h2 id="contact-direct" className="sr-only">Direct contact</h2>
-        <div className="grid gap-3 sm:grid-cols-2">
-          <Link
-            href={`mailto:${email}`}
-            className="group flex items-center gap-3 rounded-lg border p-4 hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            <Mail className="size-5 text-muted-foreground group-hover:text-foreground" />
-            <span className="text-sm">
-              <span className="block text-xs text-muted-foreground">Email</span>
-              <span className="font-medium">{email}</span>
-            </span>
-          </Link>
-          <Link
-            href={`tel:${phone.replace(/\s+/g, "")}`}
-            className="group flex items-center gap-3 rounded-lg border p-4 hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            <Phone className="size-5 text-muted-foreground group-hover:text-foreground" />
-            <span className="text-sm">
-              <span className="block text-xs text-muted-foreground">Phone</span>
-              <span className="font-medium">{phone}</span>
-            </span>
-          </Link>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="fx-panel">
+            <div className="fx-panel__head">
+              <Mail aria-hidden className="size-4 text-ink-faint" />
+              <span className="fx-panel__label">Email</span>
+            </div>
+            <a href={`mailto:${email}`} className="fx-link break-all">{email}</a>
+          </div>
+          <div className="fx-panel">
+            <div className="fx-panel__head">
+              <Phone aria-hidden className="size-4 text-ink-faint" />
+              <span className="fx-panel__label">Phone</span>
+            </div>
+            <a href={`tel:${phone.replace(/\s+/g, "")}`} className="fx-link">{phone}</a>
+          </div>
         </div>
       </section>
 
-      <section aria-labelledby="contact-form">
-        <h2 id="contact-form" className="text-lg font-semibold tracking-tight">Send a message</h2>
-        <div className="rounded-lg border p-4">
-          <ContactForm />
+      {/* A person writing to me — amber. */}
+      <section aria-labelledby="contact-form" className="fx-panel fx-panel--human mt-6">
+        <div className="fx-panel__head">
+          <span className="fx-panel__label">Message</span>
         </div>
+        <h2 id="contact-form" className="site-h3 mb-6">Send a message</h2>
+        <ContactForm />
       </section>
     </div>
   );

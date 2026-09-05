@@ -109,6 +109,16 @@ Follow prompts, then add env vars in Vercel dashboard and redeploy.
 vercel.json
 - A minimal `vercel.json` is included. Vercel still auto-detects Next.js and uses the project defaults.
 
+## Design system
+The visual language comes from the small CSS design system in `theme/` (see `theme/README.md` and open `theme/index.html` for a living reference).
+
+- `theme/tokens.css` — every colour, font, size and duration. Change a token and the site follows.
+- `theme/components.css` — the `fx-` classes built on those tokens (panels, tags, buttons, eyebrows, metrics, status bar).
+- `src/app/globals.css` — imports both, points the font tokens at the `next/font` faces, and adds the few site-only `site-` classes (header, forms, dialog, article prose). It also records what each accent colour means on this site.
+- `tailwind.config.ts` — Tailwind is used for layout only; its colours, fonts and radii resolve to the same tokens.
+
+Light mode is the library's `data-fx-theme="light"` switch, set by `next-themes` alongside the `.dark` class.
+
 ## Content management
 - Edit MDX posts under `content/blog/` (filename = slug.mdx)
 - JSON data under `data/` (blogs.json, profile.json, projects.json)

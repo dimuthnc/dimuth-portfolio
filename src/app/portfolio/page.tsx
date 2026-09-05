@@ -34,11 +34,14 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function PortfolioPage() {
   const projects = await loadProjects();
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Portfolio</h1>
-        <p className="text-sm text-muted-foreground">Apps, tools, and repositories I’ve built or contributed to.</p>
-      </div>
+    <div className="fx-shell">
+      <header className="site-pagehead">
+        <p className="fx-eyebrow">
+          Portfolio <span className="fx-dot" aria-hidden /> {projects.length} projects
+        </p>
+        <h1 className="fx-title">Apps, tools, and repositories.</h1>
+        <p className="fx-lead mt-4">Things I’ve built or contributed to, most recent first.</p>
+      </header>
       <PortfolioGrid projects={projects} />
     </div>
   );

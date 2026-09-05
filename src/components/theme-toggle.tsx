@@ -2,31 +2,34 @@
 
 import { useEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
-import { Button } from '@/components/ui/button'
 import { Moon, Sun, Laptop } from 'lucide-react'
 
+const options = [
+  { value: 'light', label: 'Set light theme', Icon: Sun },
+  { value: 'dark', label: 'Set dark theme', Icon: Moon },
+  { value: 'system', label: 'Use system theme', Icon: Laptop },
+] as const
+
 export function ThemeToggle() {
-  const { theme, setTheme, systemTheme } = useTheme()
+  const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => setMounted(true), [])
 
-  const current = theme === 'system' ? systemTheme : theme
-
   return (
-    <div className="flex items-center gap-2">
-      <Button variant="ghost" size="icon" aria-label="Set light theme" onClick={() => setTheme('light')}>
-        <Sun aria-hidden />
-      </Button>
-      <Button variant="ghost" size="icon" aria-label="Set dark theme" onClick={() => setTheme('dark')}>
-        <Moon aria-hidden />
-      </Button>
-      <Button variant="ghost" size="icon" aria-label="Use system theme" onClick={() => setTheme('system')}>
-        <Laptop aria-hidden />
-      </Button>
-      <span className="text-sm text-muted-foreground">
-        {mounted ? `Theme: ${current ?? 'system'}` : '…'}
-      </span>
+    <div className="site-segment" role="group" aria-label="Colour theme">
+      {options.map(({ value, label, Icon }) => (
+        <button
+          key={value}
+          type="button"
+          className="site-iconbtn"
+          aria-label={label}
+          aria-pressed={mounted ? theme === value : undefined}
+          onClick={() => setTheme(value)}
+        >
+          <Icon aria-hidden />
+        </button>
+      ))}
     </div>
   )
 }

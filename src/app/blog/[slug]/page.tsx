@@ -6,6 +6,8 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import { canonical, defaultOgImage } from "@/lib/seo";
 import { loadProfile } from "@/lib/content";
 
@@ -66,16 +68,65 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
+function longDate(iso: string) {
+  const d = new Date(iso);
+  return isNaN(d.getTime())
+    ? iso
+    : d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+}
+
+function isoDate(iso: string) {
+  const d = new Date(iso);
+  return isNaN(d.getTime()) ? iso : d.toISOString();
+}
+
+function ArticleHead({
+  date,
+  meta,
+  title,
+  description,
+  tags,
+}: {
+  date: string;
+  meta?: string;
+  title: string;
+  description?: string;
+  tags?: string[];
+}) {
+  return (
+    <header className="mb-10">
+      <p className="fx-eyebrow">
+        Writing
+        <span className="fx-dot" aria-hidden />
+        <time dateTime={isoDate(date)}>{longDate(date)}</time>
+        {meta ? (
+          <>
+            <span className="fx-dot" aria-hidden />
+            {meta}
+          </>
+        ) : null}
+      </p>
+      <h1 className="fx-title">{title}</h1>
+      {description ? <p className="fx-lead mt-4">{description}</p> : null}
+      {tags?.length ? (
+        <div className="fx-cluster mt-5">
+          {tags.map((t) => (
+            <span key={t} className="fx-tag">
+              {t}
+            </span>
+          ))}
+        </div>
+      ) : null}
+    </header>
+  );
+}
+
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
   const profile = await loadProfile();
   const mdx = await getMdxPost(params.slug);
   const url = canonical(`/blog/${params.slug}`)
   if (mdx) {
     const { frontmatter, toc, content, readingTimeText } = mdx;
-    const date = new Date(frontmatter.date);
-    const dateStr = isNaN(date.getTime())
-      ? frontmatter.date
-      : date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 
     const articleLd = {
       "@context": "https://schema.org",
@@ -90,35 +141,33 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     }
 
     return (
-      <div className="grid gap-8 lg:grid-cols-[1fr_280px]">
-        <article>
-          <header className="mb-6 space-y-2">
-            <h1 className="text-2xl font-semibold tracking-tight">{frontmatter.title}</h1>
-            <p className="text-sm text-muted-foreground">
-              {dateStr}
-              {readingTimeText ? <> • {readingTimeText}</> : null}
-            </p>
-            {frontmatter.tags?.length ? (
-              <div className="flex flex-wrap gap-2">
-                {frontmatter.tags.map((t) => (
-                  <span key={t} className="rounded-md bg-accent px-2 py-1 text-xs text-accent-foreground">
-                    {t}
-                  </span>
-                ))}
-              </div>
-            ) : null}
-          </header>
-          <div className="prose prose-neutral dark:prose-invert max-w-none break-words prose-a:break-words prose-code:break-words prose-blockquote:break-words prose-blockquote:whitespace-normal prose-pre:overflow-x-auto prose-pre:max-w-full prose-table:block prose-table:w-full prose-table:overflow-x-auto prose-img:max-w-full prose-img:h-auto">
-            <MDXRemote
-              source={content}
-              options={{ mdxOptions: { remarkPlugins: [remarkGfm], rehypePlugins: [rehypeSlug] } }}
+      <div className="fx-shell">
+        <div className="grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,1fr)_17rem]">
+          <article className="min-w-0">
+            <ArticleHead
+              date={String(frontmatter.date)}
+              meta={readingTimeText || undefined}
+              title={frontmatter.title}
+              description={frontmatter.description}
+              tags={frontmatter.tags}
             />
-          </div>
-          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
-        </article>
-        <aside className="lg:sticky lg:top-24 h-fit">
-          <TableOfContents toc={toc} />
-        </aside>
+            <div className="site-article">
+              <MDXRemote
+                source={content}
+                options={{ mdxOptions: { remarkPlugins: [remarkGfm], rehypePlugins: [rehypeSlug] } }}
+              />
+            </div>
+            <div className="mt-12 border-t border-rule pt-6">
+              <Link href="/blog" className="fx-link inline-flex items-center gap-2 text-small">
+                <ArrowLeft aria-hidden /> All articles
+              </Link>
+            </div>
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
+          </article>
+          <aside className="h-fit lg:sticky lg:top-24">
+            <TableOfContents toc={toc} />
+          </aside>
+        </div>
       </div>
     );
   }
@@ -127,9 +176,6 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   const posts = await loadBlogs();
   const post = posts.find((p): p is InternalBlogPost => p.type === "internal" && p.slug === params.slug);
   if (!post) return notFound();
-
-  const date = new Date(post.date);
-  const dateStr = isNaN(date.getTime()) ? post.date : date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 
   const articleLd = {
     "@context": "https://schema.org",
@@ -144,18 +190,20 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   }
 
   return (
-    <article className="prose prose-neutral dark:prose-invert max-w-none break-words prose-a:break-words prose-code:break-words prose-blockquote:break-words prose-blockquote:whitespace-normal prose-pre:overflow-x-auto prose-pre:max-w-full prose-table:block prose-table:w-full prose-table:overflow-x-auto prose-img:max-w-full prose-img:h-auto">
-      <h1 className="mb-2 text-2xl font-semibold tracking-tight">{post.title}</h1>
-      <p className="text-sm text-muted-foreground">{dateStr} • {post.source}</p>
-      <div className="mt-3 flex flex-wrap gap-2">
-        {post.tags.map((t) => (
-          <span key={t} className="rounded-md bg-accent px-2 py-1 text-xs text-accent-foreground">{t}</span>
-        ))}
-      </div>
-      <hr className="my-6" />
-      <p className="text-base leading-relaxed text-muted-foreground">{post.excerpt}</p>
-      <p className="mt-4 text-sm text-muted-foreground">Full content coming soon…</p>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
-    </article>
+    <div className="fx-shell fx-shell--narrow">
+      <article>
+        <ArticleHead date={post.date} meta={post.source} title={post.title} tags={post.tags} />
+        <div className="site-article">
+          <p>{post.excerpt}</p>
+          <p className="fx-panel__label">Full content coming soon</p>
+        </div>
+        <div className="mt-12 border-t border-rule pt-6">
+          <Link href="/blog" className="fx-link inline-flex items-center gap-2 text-small">
+            <ArrowLeft aria-hidden /> All articles
+          </Link>
+        </div>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
+      </article>
+    </div>
   );
 }

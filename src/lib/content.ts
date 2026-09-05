@@ -4,10 +4,16 @@ import path from "path";
 export type Profile = {
   name: string;
   title: string;
+  /** Display headline for the home page. Wrap one phrase in *asterisks* to set it in the serif italic. */
+  headline?: string;
   bio: string;
   email: string;
   phone: string;
   location: string;
+  /** Short place name for eyebrows and the status bar. */
+  city?: string;
+  /** First year of professional work; drives the "years shipping" metric. */
+  careerStart?: number;
   links: {
     linkedin: string;
     github: string;

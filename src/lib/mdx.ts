@@ -50,9 +50,10 @@ export async function getMdxPost(slug: string): Promise<MdxPost | null> {
     const raw = await fs.readFile(filePath, "utf-8")
     const { data, content } = matter(raw)
     const fm = data as MdxFrontmatter
-    const rt = readingTime(content).text
-    const toc = await buildToc(content)
-    return { slug, frontmatter: fm, content, toc, readingTimeText: rt }
+    const body = stripDuplicateTitle(content, fm.title)
+    const rt = readingTime(body).text
+    const toc = await buildToc(body)
+    return { slug, frontmatter: fm, content: body, toc, readingTimeText: rt }
   } catch {
     return null
   }
@@ -86,4 +87,17 @@ function collectText(node: Heading): string {
     }
   })
   return text.trim()
+}
+
+/**
+ * Some posts open with a `# Title` that repeats the frontmatter title. The
+ * page renders the frontmatter title as the h1, so drop that first heading
+ * when it matches and avoid two h1s on the page.
+ */
+function stripDuplicateTitle(content: string, title: string | undefined): string {
+  if (!title) return content
+  const m = content.match(/^\s*#\s+(.+?)\s*\n+/)
+  if (!m) return content
+  const normalise = (s: string) => s.replace(/\s+/g, " ").trim().toLowerCase()
+  return normalise(m[1]) === normalise(title) ? content.slice(m[0].length) : content
 }
