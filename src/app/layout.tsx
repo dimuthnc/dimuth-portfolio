@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono } from "next/font/google";
+import { Inter, Instrument_Serif, JetBrains_Mono, Sora } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
+import { SiteFooter } from "@/components/site-footer";
 import dynamic from "next/dynamic";
 import { getSiteUrl, defaultOgImage } from "@/lib/seo";
 import { Analytics } from "@vercel/analytics/next";
@@ -11,11 +12,34 @@ const Toaster = dynamic(() => import("sonner").then((m) => ({ default: m.Toaster
   ssr: false,
 });
 
+/* The four faces the design system declares (theme/tokens.css). next/font
+   self-hosts them; globals.css points the --fx-font-* tokens at these vars. */
+const sora = Sora({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-sora",
+  display: "swap",
+});
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
+  weight: ["400", "500", "700"],
   variable: "--font-jetbrains-mono",
   display: "swap",
 });
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument-serif",
+  display: "swap",
+});
+
+const fontVars = [sora.variable, inter.variable, jetbrainsMono.variable, instrumentSerif.variable].join(" ");
 
 const site = getSiteUrl();
 
@@ -66,24 +90,20 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${jetbrainsMono.variable} min-h-screen bg-background text-foreground antialiased`}
-      >
+    <html lang="en" suppressHydrationWarning className={fontVars}>
+      <body className="fx-page flex min-h-dvh flex-col">
         <ThemeProvider
-          attribute="class"
+          attribute={["class", "data-fx-theme"]}
           defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
           <Navbar />
-          <main
-            id="content"
-            className="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-8"
-          >
+          <main id="content" className="flex-1 py-10 sm:py-14">
             {children}
           </main>
-          <Toaster richColors position="top-center" />
+          <SiteFooter />
+          <Toaster position="top-center" />
         </ThemeProvider>
         {/* Vercel Web Analytics */}
         <Analytics />

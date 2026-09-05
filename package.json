@@ -41,7 +41,6 @@
   },
   "devDependencies": {
     "@axe-core/react": "^4.9.1",
-    "@tailwindcss/typography": "^0.5.12",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",

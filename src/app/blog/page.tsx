@@ -29,23 +29,26 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function BlogIndexPage() {
   const posts = await loadBlogs();
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+    <div className="fx-shell">
+      <header className="site-pagehead flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Blog</h1>
-          <p className="text-sm text-muted-foreground">Articles, notes, and references.</p>
+          <p className="fx-eyebrow">
+            Writing <span className="fx-dot" aria-hidden /> {posts.length} articles
+          </p>
+          <h1 className="fx-title">Notes from building and running things.</h1>
+          <p className="fx-lead mt-4">Articles, notes, and references — here and on Medium.</p>
         </div>
         <Link
           href="/rss.xml"
-          className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="fx-button fx-button--quiet shrink-0"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Subscribe via RSS"
         >
-          <Rss className="h-4 w-4" />
-          <span>Subscribe via RSS</span>
+          <Rss aria-hidden />
+          <span>RSS</span>
         </Link>
-      </div>
+      </header>
       <BlogList posts={posts} />
     </div>
   );

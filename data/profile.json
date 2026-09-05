@@ -1,13 +1,15 @@
 {
   "name": "Dimuth Menikgamage",
   "title": "Senior Software Engineer @ Crédit Agricole CIB",
+  "headline": "Platforms that move money, and *prove* they did.",
   "bio": "Experienced and results-driven Software Engineer with 8+ years in banking, financial services, API management, IAM, middleware, and distributed systems. Proven record in microservices architecture, enterprise integration, open banking compliance, and application security. Designs scalable platforms, improves performance, and leads teams.",
   "email": "dimuthcse@gmail.com",
   "phone": "(+65) 8450 3337",
   "location": "822315, Singapore",
+  "city": "Singapore",
+  "careerStart": 2018,
   "links": {
     "linkedin": "https://www.linkedin.com/in/dimuththaraka",
     "github": "https://github.com/dimuthnc"
   }
 }
-

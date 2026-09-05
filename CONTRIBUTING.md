@@ -127,7 +127,7 @@ Make your code changes, then commit them in small, logical units:
 
 ```bash
 git status
-git add <files>
+git add <theme>
 git commit -m "Short summary of what changed"
 ```
 
