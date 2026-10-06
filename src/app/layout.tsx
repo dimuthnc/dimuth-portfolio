@@ -4,13 +4,9 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
 import { SiteFooter } from "@/components/site-footer";
-import dynamic from "next/dynamic";
 import { getSiteUrl, defaultOgImage } from "@/lib/seo";
 import { Analytics } from "@vercel/analytics/next";
-
-const Toaster = dynamic(() => import("sonner").then((m) => ({ default: m.Toaster })), {
-  ssr: false,
-});
+import { ToasterClient } from "@/components/toaster-client";
 
 /* The four faces the design system declares (theme/tokens.css). next/font
    self-hosts them; globals.css points the --fx-font-* tokens at these vars. */
@@ -103,7 +99,7 @@ export default function RootLayout({
             {children}
           </main>
           <SiteFooter />
-          <Toaster position="top-center" />
+          <ToasterClient />
         </ThemeProvider>
         {/* Vercel Web Analytics */}
         <Analytics />

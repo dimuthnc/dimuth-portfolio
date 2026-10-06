@@ -38,7 +38,7 @@ import BlogPostPage from "@/app/blog/[slug]/page";
 
 describe("MDX Blog page", () => {
   it("renders frontmatter heading", async () => {
-    const ui = await BlogPostPage({ params: { slug: "test" } });
+    const ui = await BlogPostPage({ params: Promise.resolve({ slug: "test" }) });
     render(ui);
     expect(
       await screen.findByRole("heading", { name: /hello/i, level: 1 })
