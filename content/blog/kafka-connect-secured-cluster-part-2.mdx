@@ -28,26 +28,7 @@ In a typical Spring Boot (or any other) consumer microservice, there is one cons
 
 A Kafka Connect worker running in distributed mode (as in Part 1) creates several Kafka clients under the hood.
 
-```text
-                        ┌──────────────────────────────────────────────────┐
-                        │              Kafka Connect Worker                │
-                        │                                                  │
-                        │  Worker coordination  ── group: kafka-connect-group
-                        │  Internal topics      ── kafka-connect-configs   │
-                        │   (producer+consumer)    kafka-connect-offsets   │
-                        │                          kafka-connect-status    │
-                        │  Admin client         ── creates/validates topics│
-                        │                                                  │
-                        │  ┌────────────────────────────────────────────┐  │
-                        │  │ Sink task (audit-records-jdbc-sink)        │  │
-                        │  │  Consumer ── Audit-Records.JSON            │  │
-                        │  │           ── group: connect-audit-records- │  │
-                        │  │                     jdbc-sink              │  │
-                        │  │  Producer ── Audit-Records.DLQ             │  │
-                        │  │  Admin    ── creates DLQ topic if missing  │  │
-                        │  └────────────────────────────────────────────┘  │
-                        └──────────────────────────────────────────────────┘
-```
+![Kafka clients created by a Kafka Connect worker and the ACLs each one needs](/images/blog/kafka-connect-part-2/kafka-connect-clients.svg)
 
 So, the worker is a **consumer**, a **producer** and an **admin client** at the same time, and it uses **two consumer groups**. Each of these needs the right permissions, and each of these needs the right security settings. Almost every authorization failure I have seen with Kafka Connect falls into one of the three pitfalls below.
 
