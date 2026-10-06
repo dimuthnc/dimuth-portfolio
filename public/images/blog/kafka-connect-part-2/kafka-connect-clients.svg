@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 660" width="960" height="660" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>Kafka clients created by a Kafka Connect worker and the ACLs each one needs</title>
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#ea580c"/>
+    </marker>
+    <style>
+      .title { font-size: 17px; font-weight: 700; fill: #0f172a; }
+      .sub { font-size: 12px; fill: #475569; }
+      .name { font-size: 14px; font-weight: 600; fill: #0f172a; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; fill: #0f172a; }
+      .kind { font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; }
+      .ops { font-size: 12px; font-weight: 600; fill: #15803d; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="960" height="660" rx="14" fill="#ffffff"/>
+
+  <!-- ===================== Kafka Connect worker ===================== -->
+  <rect x="24" y="24" width="380" height="612" rx="12" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="44" y="54" class="title">Kafka Connect worker</text>
+  <text x="44" y="73" class="sub">principal: User:kafka-connect · uses worker security settings</text>
+
+  <!-- Worker-level clients -->
+  <rect x="48" y="92" width="332" height="56" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="64" y="115" class="name">Worker group membership</text>
+  <text x="64" y="134" class="sub">joins the cluster of workers, balances tasks</text>
+
+  <rect x="48" y="168" width="332" height="56" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="64" y="191" class="name">Internal topics producer + consumer</text>
+  <text x="64" y="210" class="sub">writes and reads configs, offsets, status</text>
+
+  <rect x="48" y="236" width="332" height="56" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="64" y="259" class="name">Admin client</text>
+  <text x="64" y="278" class="sub">creates / validates the internal topics</text>
+
+  <!-- Sink task -->
+  <rect x="40" y="316" width="348" height="304" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="56" y="342" class="name">Sink task: audit-records-jdbc-sink</text>
+  <text x="56" y="361" class="sub">its own clients: need consumer.* / producer.* /</text>
+  <text x="56" y="377" class="sub">admin.* security overrides (Pitfall 3)</text>
+
+  <rect x="56" y="402" width="316" height="56" rx="8" fill="#ffedd5" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="72" y="425" class="name">Consumer</text>
+  <text x="72" y="444" class="sub">reads audit records, commits offsets</text>
+
+  <rect x="56" y="478" width="316" height="56" rx="8" fill="#ffedd5" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="72" y="501" class="name">Producer (errors.tolerance=all)</text>
+  <text x="72" y="520" class="sub">writes failed records to the DLQ</text>
+
+  <rect x="56" y="548" width="316" height="56" rx="8" fill="#ffedd5" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="72" y="571" class="name">Admin client</text>
+  <text x="72" y="590" class="sub">creates the DLQ topic if it is missing</text>
+
+  <!-- ===================== Kafka cluster ===================== -->
+  <rect x="588" y="24" width="348" height="612" rx="12" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="608" y="54" class="title">Secured Kafka cluster</text>
+  <text x="608" y="73" class="sub">SASL/SSL + ACLs · resource and required operations</text>
+
+  <!-- R1: worker group -->
+  <rect x="612" y="88" width="300" height="64" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="628" y="106" class="kind" fill="#2563eb">GROUP</text>
+  <text x="628" y="124" class="mono">kafka-connect-group</text>
+  <text x="628" y="143" class="ops">Read, Describe</text>
+
+  <!-- R2: internal topics -->
+  <rect x="612" y="164" width="300" height="114" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="628" y="182" class="kind" fill="#2563eb">TOPICS</text>
+  <text x="628" y="200" class="mono">kafka-connect-configs</text>
+  <text x="628" y="217" class="mono">kafka-connect-offsets</text>
+  <text x="628" y="234" class="mono">kafka-connect-status</text>
+  <text x="628" y="254" class="ops">Read, Write, Describe,</text>
+  <text x="628" y="270" class="ops">DescribeConfigs (+ Create)</text>
+
+  <!-- R3: source topic -->
+  <rect x="612" y="360" width="300" height="64" rx="8" fill="#ffffff" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="628" y="378" class="kind" fill="#ea580c">TOPIC</text>
+  <text x="628" y="396" class="mono">Audit-Records.JSON</text>
+  <text x="628" y="415" class="ops">Read, Describe</text>
+
+  <!-- R4: task consumer group -->
+  <rect x="612" y="436" width="300" height="64" rx="8" fill="#ffffff" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="628" y="454" class="kind" fill="#ea580c">GROUP · AUTO-GENERATED</text>
+  <text x="628" y="472" class="mono">connect-audit-records-jdbc-sink</text>
+  <text x="628" y="491" class="ops">Read, Describe</text>
+
+  <!-- R5: DLQ -->
+  <rect x="612" y="530" width="300" height="64" rx="8" fill="#ffffff" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="628" y="548" class="kind" fill="#ea580c">TOPIC</text>
+  <text x="628" y="566" class="mono">Audit-Records.DLQ</text>
+  <text x="628" y="585" class="ops">Write, Describe (+ Create)</text>
+
+  <!-- ===================== Arrows ===================== -->
+  <g fill="none" stroke-width="1.8">
+    <path d="M380,120 L608,120" stroke="#2563eb" marker-end="url(#arrow-blue)"/>
+    <path d="M380,196 L608,196" stroke="#2563eb" marker-end="url(#arrow-blue)"/>
+    <path d="M380,264 L608,264" stroke="#2563eb" marker-end="url(#arrow-blue)"/>
+
+    <path d="M372,430 L470,430 L520,392 L608,392" stroke="#ea580c" marker-end="url(#arrow-orange)"/>
+    <path d="M372,430 L470,430 L520,468 L608,468" stroke="#ea580c" marker-end="url(#arrow-orange)"/>
+    <path d="M372,506 L470,506 L520,552 L608,552" stroke="#ea580c" marker-end="url(#arrow-orange)"/>
+    <path d="M372,576 L608,576" stroke="#ea580c" marker-end="url(#arrow-orange)"/>
+  </g>
+
+  <!-- Legend -->
+  <g font-size="12" fill="#475569">
+    <line x1="430" y1="620" x2="456" y2="620" stroke="#2563eb" stroke-width="2"/>
+    <text x="462" y="624">worker</text>
+    <line x1="508" y1="620" x2="534" y2="620" stroke="#ea580c" stroke-width="2"/>
+    <text x="540" y="624">task</text>
+  </g>
+</svg>
