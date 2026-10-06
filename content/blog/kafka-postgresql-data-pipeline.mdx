@@ -138,6 +138,8 @@ Open the database in any of the preferred clients (using the username and passwo
 # Conclusion
 We conducted the test for a large number of records as well. We were able to notice that this Kafka connect setup is able to consume 200K records within 10 mins. This is much more maintainable as well for us as we are not overseeing much code in our side. Therefore, we can conclude, using Kafka connect for a requirement like this is much easier to test, maintain and support.
 
+> **Up next:** This setup does not cover security. To run the same connector against a Kafka cluster with SASL/SSL and ACLs enabled, read [Part 2: Running the Kafka Connect Postgres Sink on a Secured Kafka Cluster](/blog/kafka-connect-secured-cluster-part-2).
+
 
 
 

@@ -158,5 +158,14 @@
     "date": "2026-03-16",
     "tags": ["s3", "docker", "open-source", "devops", "minio", "self-hosted"],
     "excerpt": "S3 Manager is a self-hosted web UI designed to simplify the management of S3-compatible storage buckets, providing an intuitive interface for users to interact with their cloud storage resources."
+  },
+  {
+    "type": "internal",
+    "title": "Blueprint Part 2: Running the Kafka Connect Postgres Sink on a Secured Kafka Cluster (Group IDs, ACLs and Authorization Failures)",
+    "slug": "kafka-connect-secured-cluster-part-2",
+    "source": "dimuthmenikgama.com",
+    "date": "2026-10-06",
+    "tags": ["Kafka", "Kafka Connect", "PostgreSQL", "Sink Connector", "Security", "ACL", "SASL", "Authorization", "Consumer Groups", "Troubleshooting", "Data Engineering"],
+    "excerpt": "A follow-up to the Kafka Connect to Postgres blueprint. Why a Kafka Connect sink fails with authorization errors on a secured cluster even when the same group ID works for other applications, and the exact permissions, group IDs and client settings Kafka Connect really needs."
   }
 ]
